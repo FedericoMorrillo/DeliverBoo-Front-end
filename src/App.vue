@@ -1,4 +1,4 @@
-<script>
+<script setup>
 import FooterArea from './components/FooterArea.vue';
 import HomeArea from './components/HomeArea.vue';
 import TypeArea from './components/TypeArea.vue';
