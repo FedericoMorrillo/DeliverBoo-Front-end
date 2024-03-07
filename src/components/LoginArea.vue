@@ -15,7 +15,7 @@ export default {}
             <div class="d-flex">
                 <!--logo-->
                 <div class="logo pt-1">
-                    <img src="../../public/img/logo.jpeg" alt="Logo">
+                    <img src="/img/logo.jpeg" alt="Logo">
                 </div>
                 <!--/logo-->
                 <ul class="d-flex align-items-center ps-3">

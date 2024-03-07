@@ -64,7 +64,14 @@ export default {}
 
             <!--center button container-->
             <div class="d-flex justify-content-center">
-                <button class="btn btn-org btn-lg mb-4" type="button">Ordina ora!</button>
+                <!--card-->
+                <div class="bg-white order p-3 rounded">
+                    <h4>Ordina ora!</h4>
+                    <p>
+                        Scegli la tipologia di ristoranti per visualizzare i ristoranti di quel genere
+                    </p>
+                </div>
+                <!--/card-->
             </div>
             <!--/center button container-->
         </div>
