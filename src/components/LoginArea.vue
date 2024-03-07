@@ -20,7 +20,7 @@ export default {}
                 <!--/logo-->
                 <ul class="d-flex align-items-center ps-3">
                     <li>
-                        Home
+                        <a class="text-dark" href="http://localhost:5174/">Home</a>
                     </li>
                 </ul>
             </div>
@@ -29,10 +29,10 @@ export default {}
             <!--login-register-->
             <ul class="d-flex align-items-center">
                 <li class="pe-3">
-                    <a class="text-dark" href="">Login</a>
+                    <a class="text-dark" href="http://127.0.0.1:8000/login">Login</a>
                 </li>
                 <li class="pe-2">
-                    <a class="text-dark" href="">Register</a>
+                    <a class="text-dark" href="http://127.0.0.1:8000/register">Register</a>
                 </li>
             </ul>
             <!--/login-register-->
