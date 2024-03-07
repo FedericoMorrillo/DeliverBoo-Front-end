@@ -1,8 +1,9 @@
 <!--JS-->
 
 <script>
-import TypeArea from './TypeArea.vue';
+import TypeArea from '../components/TypeArea.vue';
 export default {
+    name: 'HomeArea',
     components: {
         TypeArea,
     }

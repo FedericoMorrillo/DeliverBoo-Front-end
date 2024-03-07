@@ -35,8 +35,6 @@ export default {
         this.getTypes();
     }
 }
-
-
 </script>
 
 <!--/JS-->

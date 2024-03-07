@@ -1,11 +1,9 @@
 <script>
 import FooterArea from './components/FooterArea.vue';
-import HomeArea from './components/HomeArea.vue';
 import LoginArea from './components/LoginArea.vue';
 export default {
   components: {
     FooterArea,
-    HomeArea,
     LoginArea,
   }
 }
@@ -13,7 +11,7 @@ export default {
 
 <template>
   <LoginArea />
-  <HomeArea />
+  <router-view></router-view>
   <FooterArea />
 </template>
 
