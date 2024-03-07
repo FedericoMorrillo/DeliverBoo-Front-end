@@ -1,7 +1,12 @@
 <!--JS-->
 
 <script>
-export default {}
+import TypeArea from './TypeArea.vue';
+export default {
+    components: {
+        TypeArea,
+    }
+}
 </script>
 
 <!--/JS-->
@@ -76,6 +81,7 @@ export default {}
             <!--/center button container-->
         </div>
     </div>
+    <TypeArea />
 </template>
 
 <!--/HTML-->
