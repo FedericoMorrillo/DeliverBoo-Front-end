@@ -11,7 +11,7 @@ export default {
     },
     methods: {
         getRestaurants() {
-            axios.get('http://127.0.0.1:8000/api/restaurants').then((response) => {
+            axios.get('http://127.0.0.1:8000/api/restaurants', { params: { type: store.type } }).then((response) => {
                 this.restaurants = response.data.results;
                 console.log(response);
             });
