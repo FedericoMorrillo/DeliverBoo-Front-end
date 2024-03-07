@@ -1,7 +1,27 @@
 <!--JS-->
 
 <script>
-export default {}
+import axios from 'axios';
+export default {
+    data() {
+        return {
+            'types': [],
+        }
+    },
+    methods: {
+        getTypes() {
+            axios.get('http://127.0.0.1:8000/api/types/').then((response) => {
+                this.types = response.data.results;
+                console.log(this.types);
+            });
+        }
+    },
+    created() {
+        this.getTypes();
+    }
+}
+
+
 </script>
 
 <!--/JS-->
@@ -9,107 +29,14 @@ export default {}
 <!--HTML-->
 
 <template>
-    <div class="section">
+    <div class="section my-4">
         <div class="container d-flex flex-wrap">
-            <div class="type-card">
-                <ul>
-                    <li class="img">
-                        pizza foto logo
-                    </li>
-                    <li class="text-center">
-                        nome
-                    </li>
-                </ul>
-            </div>
-            <div class="type-card">
-                <ul>
-                    <li class="img">
-                        pizza foto logo
-                    </li>
-                    <li class="text-center">
-                        nome
-                    </li>
-                </ul>
-            </div>
-            <div class="type-card">
-                <ul>
-                    <li class="img">
-                        pizza foto logo
-                    </li>
-                    <li class="text-center">
-                        nome
-                    </li>
-                </ul>
-            </div>
-            <div class="type-card">
-                <ul>
-                    <li class="img">
-                        pizza foto logo
-                    </li>
-                    <li class="text-center">
-                        nome
-                    </li>
-                </ul>
-            </div>
-            <div class="type-card">
-                <ul>
-                    <li class="img">
-                        pizza foto logo
-                    </li>
-                    <li class="text-center">
-                        nome
-                    </li>
-                </ul>
-            </div>
-            <div class="type-card">
-                <ul>
-                    <li class="img">
-                        pizza foto logo
-                    </li>
-                    <li class="text-center">
-                        nome
-                    </li>
-                </ul>
-            </div>
-            <div class="type-card">
-                <ul>
-                    <li class="img">
-                        pizza foto logo
-                    </li>
-                    <li class="text-center">
-                        nome
-                    </li>
-                </ul>
-            </div>
-            <div class="type-card">
-                <ul>
-                    <li class="img">
-                        pizza foto logo
-                    </li>
-                    <li class="text-center">
-                        nome
-                    </li>
-                </ul>
-            </div>
-            <div class="type-card">
-                <ul>
-                    <li class="img">
-                        pizza foto logo
-                    </li>
-                    <li class="text-center">
-                        nome
-                    </li>
-                </ul>
-            </div>
-            <div class="type-card">
-                <ul>
-                    <li class="img">
-                        pizza foto logo
-                    </li>
-                    <li class="text-center">
-                        nome
-                    </li>
-                </ul>
+            <!-- Itera su ciascun tipo nell'array types -->
+            <div class="type-card" v-for="item in types">
+                <img :src="item.image" class="card-img-top" :alt="item.name">
+                <div class="card-body">
+                    <div class="card-text text-center">{{ item.name }}</div>
+                </div>
             </div>
         </div>
     </div>
@@ -118,31 +45,4 @@ export default {}
 <!--/HTML-->
 
 <!--CSS-->
-
-<style scoped lang="scss"></style>
 <!--/CSS-->
-
-
-
-
-
-
-
-<!-- <div class="type-card">
-    <ul>
-        <li class="img">
-            pizza foto logo
-        </li>
-        <li>
-            nome
-        </li>
-        <ul class="d-flex justify-content-between">
-            <li>
-                prezzo
-            </li>
-            <li>
-                <button>compra</button>
-            </li>
-        </ul>
-    </ul>
-</div> -->
