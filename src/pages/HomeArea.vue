@@ -2,6 +2,7 @@
 
 <script>
 import TypeArea from '../components/TypeArea.vue';
+
 export default {
     name: 'HomeArea',
     components: {
