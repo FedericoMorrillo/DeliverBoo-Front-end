@@ -3,11 +3,7 @@
 <script>
 import axios from 'axios';
 import { store } from '../store';
-import RestaurantArea from './RestaurantArea.vue'
 export default {
-    components: {
-        RestaurantArea,
-    },
     data() {
         return {
             'searchkey': null,
@@ -25,15 +21,11 @@ export default {
             if (this.searchkey) {
                 axios.get('http://127.0.0.1:8000/api/types/', { params: { key: this.searchkey } }).then((response) => {
                     this.types = response.data.results;
-
-                    console.log(response);
                 });
             }
             else {
                 axios.get('http://127.0.0.1:8000/api/types/').then((response) => {
                     this.types = response.data.results;
-
-                    console.log(response);
                 });
             }
         }
@@ -60,10 +52,8 @@ export default {
 
         <div class="d-flex flex-wrap">
             <!-- Itera su ciascun tipo nell'array types -->
-            <router-link :to="{
-            name: AdvanceResearch, path: '/restaurants'
-        }" class="type-card" role="button" v-for="item in types"
-                @click="setType(item.id)">
+            <router-link :to="{ name: AdvanceResearch, path: '/restaurants'}" class="type-card"
+                role="button" v-for="item in types" @click="setType(item.id)">
                 <img :src="item.image" class="card-img-top" :alt="item.name">
                 <div class="card-body">
                     <div class="card-text text-center">{{ item.name }}</div>
@@ -71,7 +61,6 @@ export default {
             </router-link>
         </div>
     </div>
-    <RestaurantArea />
 </template>
 
 <!--/HTML-->

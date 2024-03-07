@@ -6,22 +6,19 @@ import { store } from '../store';
 export default {
     data() {
         return {
-            'restaurants': []
+            'restaurant': {}
         }
     },
     methods: {
-        getRestaurants() {
-            axios.get('http://127.0.0.1:8000/api/restaurants', { params: { type: store.type } }).then((response) => {
-                this.restaurants = response.data.results;
+        getRestaurant() {
+            axios.get('http://127.0.0.1:8000/api/restaurants/'+store.restaurant_id).then((response) => {
+                this.restaurant = response.data.results;
+                console.log(response);
             });
-        },
-
-        setRestaurant(id) {
-            return store.restaurant_id = id;
         },
     },
     created() {
-        this.getRestaurants();
+        this.getRestaurant();
     }
 }
 </script>
@@ -32,15 +29,15 @@ export default {
 
 <template>
     <section class="container">
+        <h2></h2>
         <div class="d-flex flex-wrap">
             <!-- Itera su ciascun tipo nell'array types -->
-            <router-link class="type-card" role="button" @click="setRestaurant(item.id)" 
-                v-for="item in restaurants" :to="{ name: RestaurantArea, path: '/restaurants/'+item.id}" >
+            <div class="type-card" v-for="item in restaurant.dishes">
                 <img :src="item.image" class="card-img-top" :alt="item.name">
                 <div class="card-body">
                     <div class="card-text text-center">{{ item.name }}</div>
                 </div>
-            </router-link>
+            </div>
         </div>
     </section>
 </template>
