@@ -3,6 +3,7 @@
 <script>
 import axios from 'axios';
 import { store } from '../store';
+import RestaurantArea from '../pages/RestaurantArea.vue';
 export default {
     data() {
         return {
@@ -82,13 +83,13 @@ export default {
     <h3 class="text-center mt-4">Ristoranti:</h3>
     <div class="d-flex flex-wrap container">
         <!-- Itera su ciascun tipo nell'array types -->
-        <div class="restaurant-card rounded p-3 my-3" role="button" @click="setRestaurant(item.id)"
-            v-for="item in restaurants">
+        <router-link class="restaurant-card rounded p-3 my-3" role="button" @click="setRestaurant(item.id)"
+            v-for="item in restaurants" :to="{ name: RestaurantArea, path: '/restaurants/' + item.id }">
             <!-- <img :src="item.image" class="card-img-top" :alt="item.name"> -->
             <div class="card-body">
                 <div class="card-text text-center">{{ item.name }}</div>
             </div>
-        </div>
+        </router-link>
     </div>
     <!--/Ristoranti-->
 
