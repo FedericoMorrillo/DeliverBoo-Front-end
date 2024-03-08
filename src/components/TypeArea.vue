@@ -10,6 +10,7 @@ export default {
             'searchkey': null,
             'types': [],
             'restaurants': [],
+            'selectedTypes': [],
             store
         }
 
@@ -73,7 +74,13 @@ export default {
         <div class="type-card rounded" role="button" v-for="item in types" @click="setType(item.id)">
             <img :src="item.image" class="card-img-top" :alt="item.name">
             <div class="card-body">
-                <div class="card-text text-center">{{ item.name }}</div>
+                <div class="form-check">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        {{ item.name }}
+                    </label>
+                    <input class="form-check-input" type="checkbox" :value="item.id" id="flexCheckDefault"
+                        v-model="selectedTypes">
+                </div>
             </div>
         </div>
     </div>
@@ -81,11 +88,11 @@ export default {
 
     <!--Ristoranti-->
     <h3 class="text-center mt-4">Ristoranti:</h3>
-    <div class="d-flex flex-wrap container">
+    <div class="d-flex flex-wrap container mb-3">
         <!-- Itera su ciascun tipo nell'array types -->
         <router-link class="restaurant-card rounded p-3 my-3" role="button" @click="setRestaurant(item.id)"
             v-for="item in restaurants" :to="{ name: RestaurantArea, path: '/restaurants/' + item.id }">
-            <!-- <img :src="item.image" class="card-img-top" :alt="item.name"> -->
+            <img :src="item.image" class="card-img-top" :alt="item.name">
             <div class="card-body">
                 <div class="card-text text-center">{{ item.name }}</div>
             </div>
