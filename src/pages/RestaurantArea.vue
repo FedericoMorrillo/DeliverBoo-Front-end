@@ -37,16 +37,11 @@ export default {
                 <div class="card-body">
                     <div class="card-text text-center"><strong>{{ item.name }}</strong></div>
                 </div>
-                <div class="desc-window text-secondary">
-                    {{ item.description }}
+                <div>
+                    <span class="fs.secondary me-2 mt-3 mb-2"><strong>Prezzo:</strong></span>{{ item.price }}€
                 </div>
-                <div class="d-flex mt-3 mb-2 justify-content-between align-items-center">
-                    <div>
-                        <span class="fs.secondary me-2 bold"><strong>Prezzo:</strong></span>{{ item.price }}€
-                    </div>
-                    <div>
-                        <button class="btn btn-org">Acquista</button>
-                    </div>
+                <div>
+                    <button class="btn btn-org">Acquista</button>
                 </div>
             </div>
         </div>
