@@ -6,9 +6,8 @@ import { store } from '../store';
 export default {
     data() {
         return {
-            'searchkey': null,
-            'types': [],
-            store
+            types: [],
+            store,
         }
 
     },
@@ -18,16 +17,9 @@ export default {
             return store.type = id;
         },
         getTypes() {
-            if (this.searchkey) {
-                axios.get('http://127.0.0.1:8000/api/types/', { params: { key: this.searchkey } }).then((response) => {
+                axios.get('http://localhost:8000/api/types/').then((response) => {
                     this.types = response.data.results;
-                });
-            }
-            else {
-                axios.get('http://127.0.0.1:8000/api/types/').then((response) => {
-                    this.types = response.data.results;
-                });
-            }
+                })
         }
     },
     created() {
@@ -41,24 +33,11 @@ export default {
 <!--HTML-->
 
 <template>
-    <div class="container section my-4">
-        <form action="" @submit.prevent="getTypes">
-            <div class="mb-3 row">
-                <div class="col-10">
-                    <label for="exampleInputEmail1" class="form-label fw-bold">Cerca la Tipologia</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        v-model="searchkey">
-                </div>
-                <div class="col-2 mt-auto">
-                    <button class="btn btn-org">cerca</button>
-                </div>
-            </div>
-
-        </form>
-
+    <div class="container section my-4 mt-5 ciao">
+         <h4 class="lengtharray">attualmente ci sono {{ types.length }} tipi di ristoranti</h4>
         <div class="d-flex flex-wrap">
             <!-- Itera su ciascun tipo nell'array types -->
-            <router-link :to="{ name: AdvanceResearch, path: '/restaurants' }" class="type-card rounded" role="button"
+            <router-link :to="{ name: AdvanceResearch, path: '/restaurants' }" class="type-card rounded hoverimg  mb-5" role="button"
                 v-for="item in types" @click="setType(item.id)">
                 <img :src="item.image" class="card-img-top" :alt="item.name">
                 <div class="card-body">
@@ -68,6 +47,19 @@ export default {
         </div>
     </div>
 </template>
+
+<style scoped lang="scss">
+.hoverimg:hover{
+    transition: 1s ease-in-out;
+    transform: translateZ(300px) translateY(20px) rotateZ(2deg);
+    background-color:#FFA500 ;
+}
+
+.hoverimg{
+    transform:perspective(1000px);
+    transform-style: preserve-3d;
+}
+</style>
 
 <!--/HTML-->
 

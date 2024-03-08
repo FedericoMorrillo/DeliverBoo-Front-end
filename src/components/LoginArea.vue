@@ -1,7 +1,14 @@
 <!--JS-->
 
 <script>
-export default {}
+export default {
+    data() {
+        return {
+        }
+
+    },
+
+}
 </script>
 
 <!--/JS-->
@@ -9,18 +16,18 @@ export default {}
 <!--HTML-->
 
 <template>
-    <header class="d-flex align-items-center">
-        <div class="container d-flex justify-content-between">
+    <header class="d-flex align-items-center headerblackmode">
+        <div class="container d-flex justify-content-between nav">
 
             <div class="d-flex">
                 <!--logo-->
                 <div class="logo pt-1">
-                    <img src="/img/logo.jpeg" alt="Logo">
-                </div>
+                <img src="/img/logo.jpeg" alt="Logo" class="logo-img">
+             </div>
                 <!--/logo-->
                 <ul class="d-flex align-items-center ps-3">
-                    <li>
-                        <a class="text-dark" href="http://localhost:5174/">Home</a>
+                    <li class="scale">
+                        <a class="hovernav" href="http://localhost:5174/">Home</a>
                     </li>
                 </ul>
             </div>
@@ -28,11 +35,19 @@ export default {}
 
             <!--login-register-->
             <ul class="d-flex align-items-center">
-                <li class="pe-3">
-                    <a class="text-dark" href="http://127.0.0.1:8000/login">Login</a>
+                <li class="pe-3 login scale">
+                    <a class="hovernav" href="http://127.0.0.1:8000/login">Login</a>
                 </li>
-                <li class="pe-2">
-                    <a class="text-dark" href="http://127.0.0.1:8000/register">Register</a>
+                <li class="pe-2 register scale">
+                    <a class="hovernav" href="http://127.0.0.1:8000/register">Register</a>
+                </li>
+                <li>
+                        <div class="darkmode-on">
+                            <button class="dark">
+                            <i class="fa-solid fa-moon"></i> dark mode</button>
+                        </div>
+                    <button class=" light blocknone">
+                        <i class="fa-regular fa-sun"></i> light mode</button>
                 </li>
             </ul>
             <!--/login-register-->
@@ -44,5 +59,46 @@ export default {}
 
 <!--CSS-->
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.hovernav:hover{
+    color: white;
+}
+
+.scale:hover{
+    transform: scale(1.2);
+    transition: 0.3s ease-in-out;
+}
+
+.dark, .light{
+    border-radius: 50px;
+    padding: 10px;
+}
+
+
+.dark:hover{
+    background-color: black;
+    color: white;
+    transition: 0.5s ease-in-out;
+}
+
+
+
+.logo-img {
+  animation: walk 2s linear infinite;
+}
+
+@keyframes walk {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
+</style>
 <!--/CSS-->

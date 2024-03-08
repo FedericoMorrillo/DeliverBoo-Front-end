@@ -1,6 +1,11 @@
 header {
     height: 5rem;
     background-color: #FFA500;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    z-index: 9999;
 
     .fnt-std {
         font-size: 1.25rem;
