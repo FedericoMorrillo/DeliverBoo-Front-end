@@ -59,10 +59,13 @@ export default {
 
 <template>
     <!--Tipologie-->
-    <h3 class="text-center mt-4">Tipologie:</h3>
+    <div class="container">
+        <h4 class="lengtharray mt-4 my-3">attualmente ci sono {{ types.length }} tipi di Tipologie</h4>
+    </div>
+
     <div class="d-flex flex-wrap container mt-2 mb-4">
         <!-- Itera su ciascun tipo nell'array types -->
-        <div class="type-card rounded" v-for="item in types" :key="item.id">
+        <div class="type-card rounded hoverimg" v-for="item in types" :key="item.id">
             <img :src="item.image" class="card-img-top" :alt="item.name">
             <div class="card-body">
                 <div class="form-check">
