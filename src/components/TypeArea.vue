@@ -20,12 +20,12 @@ export default {
             return this.store.type = id;
         },
         getTypes() {
-            axios.get('http://127.0.0.1:8000/api/types/').then((response) => {
+            axios.get('http://localhost:8000/api/types/').then((response) => {
                 this.types = response.data.results;
             });
         },
         getRestaurants() {
-            axios.get('http://127.0.0.1:8000/api/restaurants/').then((response) => {
+            axios.get('http://localhost:8000/api/restaurants/').then((response) => {
                 this.restaurants = response.data.results;
                 this.filterRestaurants();
             });
@@ -65,7 +65,7 @@ export default {
 
     <div class="d-flex flex-wrap container mt-2 mb-4">
         <!-- Itera su ciascun tipo nell'array types -->
-        <div class="type-card rounded hoverimg" v-for="item in types" :key="item.id">
+        <div class="type-card rounded hoverimg  mb-5" v-for="item in types" :key="item.id">
             <img :src="item.image" class="card-img-top" :alt="item.name">
             <div class="card-body">
                 <div class="form-check">
@@ -99,9 +99,12 @@ export default {
 
 <style scoped lang="scss">
 .hoverimg:hover {
-    transition: 1s ease-in-out;
-    transform: translateZ(300px) translateY(20px) rotateZ(2deg);
+    transition: 0.5s ease-in-out;
+    // transform: translateZ(300px) translateY(20px);
+    transform: scale(1.1);
+    transform: translateY(10px);
     background-color: #FFA500;
+    box-shadow: none;
 }
 
 .hoverimg {
