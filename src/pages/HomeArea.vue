@@ -17,11 +17,11 @@ export default {
 
 <template>
     <!--Jumbotron-->
-    <div class="jumbotron container p-5 my-4 bg-light rounded-3">
+    <div class="jumbotron p-5 mt-5 my-4 bg-light rounded-3">
 
         <!--title-->
         <div class="my-5">
-            <h1 class="display-5 fw-bold align-self-center ps-4">
+            <h1 class="display-5 fw-bold align-self-center ps-4" id="myDivv">
                 QuackDelivery
             </h1>
         </div>
@@ -44,7 +44,7 @@ export default {
             <!--card container-->
             <div class="d-flex gap-5 mb-4">
                 <!--card-->
-                <div class="home-card p-3 rounded">
+                <div class="home-card p-3 rounded description">
                     <h4>Ordina in modo semplice e veloce</h4>
                     <p>
                         Con la nostra applicazione intuitiva e facile da usare, puoi ordinare il tuo pasto preferito in
@@ -57,7 +57,7 @@ export default {
                 <!--/card-->
 
                 <!--card-->
-                <div class="home-card p-3 rounded">
+                <div class="home-card p-3 rounded description">
                     <h4>Consegna veloce e affidabile</h4>
                     <p>
                         Non importa dove ti trovi, il tuo pasto arriverà caldo e fresco in breve tempo. Grazie alla
@@ -72,7 +72,7 @@ export default {
             <!--center button container-->
             <div class="d-flex justify-content-center">
                 <!--card-->
-                <div class="bg-white order p-3 rounded">
+                <div class="bg-white order p-3 rounded description">
                     <h4>Ordina ora!</h4>
                     <p>
                         Scegli la tipologia di ristoranti per visualizzare i ristoranti di quel genere
@@ -90,5 +90,15 @@ export default {
 
 <!--CSS-->
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+.description:hover{
+    transform: scale(1.1);
+    transition: 0.8s;
+}
+
+
+
+
+</style>
 <!--/CSS-->

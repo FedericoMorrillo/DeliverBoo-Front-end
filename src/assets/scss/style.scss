@@ -6,6 +6,7 @@
 
 //reset
 
+
 * {
     margin: 0;
     padding: 0;
@@ -21,7 +22,18 @@ a {
 //reset
 
 body {
-    background-color: #e7e3df;
+    // background-color: #e7e3df;
+    background-image: url(https://images.freeimages.com/images/large-previews/a3b/website-rays-background-pattern-1637863.png);
+    transition: 0.5s;
+
+}
+
+.blocknone {
+    display: none;
+}
+
+.on {
+    display: block;
 }
 
 //font paragrafi
@@ -34,8 +46,9 @@ p {
 //jumbotron
 .jumbotron {
     background-image: url('/img/jumbo.jpg');
-    background-size: 100%;
+    background-size: cover;
     background-repeat: no-repeat;
+
 
     h1 {
         color: rgba(0, 0, 0, 0.767);
@@ -76,6 +89,18 @@ p {
     border: .125rem solid #FFA500;
 }
 
+.color {
+    color: white
+}
+
+.color2 {
+    color: black;
+}
+
+.bgcolor {
+    background-color: black;
+}
+
 //Home
 
 //TypeArea
@@ -109,6 +134,5 @@ p {
     height: 3.75rem;
     overflow-y: hidden;
 }
-
 
 //RestaurantArea
