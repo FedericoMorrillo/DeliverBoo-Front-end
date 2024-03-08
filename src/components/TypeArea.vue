@@ -43,11 +43,17 @@ export default {
 <template>
     <div class="container section my-4">
         <form action="" @submit.prevent="getTypes">
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Cerca la Tipologia</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    v-model="searchkey">
+            <div class="mb-3 row">
+                <div class="col-10">
+                    <label for="exampleInputEmail1" class="form-label fw-bold">Cerca la Tipologia</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        v-model="searchkey">
+                </div>
+                <div class="col-2 mt-auto">
+                    <button class="btn btn-org">cerca</button>
+                </div>
             </div>
+
         </form>
 
         <div class="d-flex flex-wrap">
