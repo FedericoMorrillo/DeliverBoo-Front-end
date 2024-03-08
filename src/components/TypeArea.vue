@@ -52,8 +52,8 @@ export default {
 
         <div class="d-flex flex-wrap">
             <!-- Itera su ciascun tipo nell'array types -->
-            <router-link :to="{ name: AdvanceResearch, path: '/restaurants'}" class="type-card"
-                role="button" v-for="item in types" @click="setType(item.id)">
+            <router-link :to="{ name: AdvanceResearch, path: '/restaurants' }" class="type-card rounded" role="button"
+                v-for="item in types" @click="setType(item.id)">
                 <img :src="item.image" class="card-img-top" :alt="item.name">
                 <div class="card-body">
                     <div class="card-text text-center">{{ item.name }}</div>
