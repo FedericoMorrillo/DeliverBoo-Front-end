@@ -4,56 +4,47 @@
 import axios from 'axios';
 import { store } from '../store';
 import RestaurantArea from '../pages/RestaurantArea.vue';
+
 export default {
     data() {
         return {
-            'searchkey': null,
-            'types': [],
-            'restaurants': [],
-            'selectedTypes': [],
+            types: [],
+            restaurants: [],
+            selectedTypes: [],
+            filteredRestaurants: [], // Aggiungi questa linea
             store
         }
-
     },
     methods: {
-        //TIPOLOGIE
         setType(id) {
-
-            return store.type = id;
+            return this.store.type = id;
         },
         getTypes() {
-            if (this.searchkey) {
-                axios.get('http://127.0.0.1:8000/api/types/', { params: { key: this.searchkey } }).then((response) => {
-                    this.types = response.data.results;
-                });
-            }
-            else {
-                axios.get('http://127.0.0.1:8000/api/types/').then((response) => {
-                    this.types = response.data.results;
-                });
-            }
+            axios.get('http://127.0.0.1:8000/api/types/').then((response) => {
+                this.types = response.data.results;
+            });
         },
-        //RISTORANTI
-
         getRestaurants() {
-            if (store.type) {
-                axios.get('http://127.0.0.1:8000/api/restaurants/', { params: { type: store.type } }).then((response) => {
-                    this.restaurants = response.data.results;
-                });
-            }
-            else {
-                axios.get('http://127.0.0.1:8000/api/restaurants/').then((response) => {
-                    this.restaurants = response.data.results;
-                });
-
-            }
+            axios.get('http://127.0.0.1:8000/api/restaurants/').then((response) => {
+                this.restaurants = response.data.results;
+                this.filterRestaurants();
+            });
         },
-
-
+        filterRestaurants() {
+            console.log("Selected Types:", this.selectedTypes);
+            if (this.selectedTypes.length > 0) {
+                this.filteredRestaurants = this.restaurants.filter(restaurant =>
+                    restaurant.types && Array.isArray(restaurant.types) &&
+                    this.selectedTypes.every(typeId => restaurant.types.some(type => type.id === typeId))
+                );
+            } else {
+                this.filteredRestaurants = this.restaurants;
+            }
+            console.log("Filtered Restaurants:", this.filteredRestaurants);
+        },
         setRestaurant(id) {
-            return store.restaurant_id = id;
+            return this.store.restaurant_id = id;
         },
-
     },
     created() {
         this.getTypes();
@@ -71,15 +62,15 @@ export default {
     <h3 class="text-center mt-4">Tipologie:</h3>
     <div class="d-flex flex-wrap container mt-2 mb-4">
         <!-- Itera su ciascun tipo nell'array types -->
-        <div class="type-card rounded" role="button" v-for="item in types" @click="setType(item.id)">
+        <div class="type-card rounded" v-for="item in types" :key="item.id">
             <img :src="item.image" class="card-img-top" :alt="item.name">
             <div class="card-body">
                 <div class="form-check">
-                    <label class="form-check-label" for="flexCheckDefault">
+                    <label class="form-check-label" :for="'type-checkbox-' + item.id">
                         {{ item.name }}
                     </label>
-                    <input class="form-check-input" type="checkbox" :value="item.id" id="flexCheckDefault"
-                        v-model="selectedTypes">
+                    <input class="form-check-input" type="checkbox" :value="item.id" :id="'type-checkbox-' + item.id"
+                        v-model="selectedTypes" @change="filterRestaurants">
                 </div>
             </div>
         </div>
@@ -91,7 +82,8 @@ export default {
     <div class="d-flex flex-wrap container mb-3">
         <!-- Itera su ciascun tipo nell'array types -->
         <router-link class="restaurant-card rounded p-3 my-3" role="button" @click="setRestaurant(item.id)"
-            v-for="item in restaurants" :to="{ name: RestaurantArea, path: '/restaurants/' + item.id }">
+            v-for="item in filteredRestaurants" :key="item.id"
+            :to="{ name: RestaurantArea, path: '/restaurants/' + item.id }">
             <img :src="item.image" class="card-img-top" :alt="item.name">
             <div class="card-body">
                 <div class="card-text text-center">{{ item.name }}</div>
@@ -101,7 +93,6 @@ export default {
     <!--/Ristoranti-->
 
 </template>
-
 <!--/HTML-->
 
 <!--CSS-->
