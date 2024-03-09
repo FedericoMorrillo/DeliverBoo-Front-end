@@ -81,7 +81,8 @@ export default {
     <!--/Tipologie-->
 
     <!--Ristoranti-->
-    <h3 class="text-center mt-4">Ristoranti:</h3>
+    h2
+    <h3 class="text-center mt-4">Ristoranti trovati {{filteredRestaurants.length }}:</h3>
     <div class="d-flex flex-wrap container mb-3">
         <!-- Itera su ciascun tipo nell'array types -->
         <router-link class="restaurant-card rounded p-3 my-3" role="button" @click="setRestaurant(item.id)"
