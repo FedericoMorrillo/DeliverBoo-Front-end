@@ -6,6 +6,7 @@ import { store } from '../store';
 
 export default {
     cart: JSON.parse(localStorage.getItem('cart')) || [],
+
     data() {
         return {
             restaurant: [],
@@ -35,6 +36,9 @@ export default {
             axios.get('http://localhost:8000/api/restaurants/' + store.restaurant_id).then((response) => {
                 this.restaurant = response.data.results;
                 console.log(response);
+                this.restaurant.dishes.forEach(item => {
+                    item.quantity = 1;
+                });
             });
         },
 
@@ -101,9 +105,10 @@ export default {
                 <div>
                     <span class="fs.secondary me-2 mt-3 mb-2"><strong>Prezzo:</strong></span>{{ item.price }}€
                 </div>
-                <input type="number" min="1" v-model="item.quantity" class="form-control mt-3 mb-3">
+                <input type="number" min="1" max="50" v-model="item.quantity" class="form-control mt-3 mb-3">
                 <div>
-                    <button @click="addToCart(item)" class="btn btn-org">Aggiungi al carrello</button>
+                    <button @click="addToCart(item)" class="btn btn-org">Aggiungi al
+                        carrello</button>
                 </div>
             </div>
         </div>
