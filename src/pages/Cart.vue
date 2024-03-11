@@ -80,20 +80,21 @@ export default {
                     userData: this.userData
                 };
                 console.log(orderData);
-                this.clearCart();
-                this.clearUserData();
                 this.showForm = false;
-                // axios.post('http://localhost:8000/api/orders', orderData)
-                //     .then(response => {
-                //         // Il server ha confermato l'ordine e ha salvato i dati nel database
-                //         console.log('Ordine confermato:', response.data);
-                //         // Puoi resettare il carrello e i dati utente dopo che l'ordine è stato confermato
-                //         this.clearCart();
-                //         this.clearUserData();
-                //     })
-                //     .catch(error => {
-                //         console.error('Errore durante la conferma dell\'ordine:', error);
-                //     });
+                axios.post('http://localhost:8000/api/orders', JSON.stringify(orderData), {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => {
+                        // Il server ha confermato l'ordine e ha salvato i dati nel database
+                        console.log('Ordine confermato:', response.data);
+                        // Puoi resettare il carrello e i dati utente dopo che l'ordine è stato confermato
+                        this.clearCart();
+                        this.clearUserData();
+                    })
+                    .catch(error => {
+                        console.error('Errore durante la conferma dell\'ordine:', error);
+                    });
             } else {
                 console.warn('Impossibile confermare un ordine vuoto o con dati utente incompleti.');
             }
