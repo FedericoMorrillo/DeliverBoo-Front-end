@@ -3,11 +3,16 @@
 <script>
 import axios from 'axios';
 import { store } from '../store';
+import Cart from '../components/Cart.vue';
+
 export default {
     data() {
         return {
             'restaurant': {}
         }
+    },
+    components: {
+        Cart
     },
     methods: {
         getRestaurant() {
@@ -30,21 +35,27 @@ export default {
 <template>
     <section class="container in-b">
         <h2 class="mt-3 py-2 px-3 btn-org">Menù</h2>
+        <Cart />
         <div class="d-flex flex-wrap">
-            <!-- Itera su ciascun tipo nell'array types -->
-            <div class="restaurant-card rounded p-3 my-3" v-for="item in restaurant.dishes">
-                <img :src="item.image" class="card-img-top" :alt="item.name">
-                <div class="card-body">
-                    <div class="card-text text-center"><strong>{{ item.name }}</strong></div>
-                </div>
+            <!-- Lista dei piatti come caselle di controllo -->
+            <div class="restaurant-card d-flex flex-column gap-3 rounded p-3 my-3"
+                v-for="(dish, index) in restaurant.dishes" :key="index">
                 <div>
-                    <span class="fs.secondary me-2 mt-3 mb-2"><strong>Prezzo:</strong></span>{{ item.price }}€
+                    <input type="checkbox" v-model="dish.selected" :id="'dish_' + index">
+                    <label class="card-body" :for="'dish_' + index"><img class="card-img-top" :src="dish.image"
+                            :alt="dish.name"> {{ dish.name }} - {{ dish.price }}€</label>
                 </div>
-                <div>
-                    <button class="btn btn-org">Acquista</button>
+
+                <div class="mt-auto">
+                    <!-- Input per selezionare la quantità dei piatti -->
+                    <input type="number" v-model.number="dish.quantity" :min="1" placeholder="Quantità"
+                        @input="validateQuantity(dish)">
+                    <button class="btn btn-org mt-3" @click="addToCart(dish)">Aggiungi al carrello</button>
                 </div>
+
             </div>
         </div>
+
     </section>
 </template>
 
