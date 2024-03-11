@@ -1,9 +1,11 @@
 <script>
 import axios from 'axios';
+import { store } from '../store'
 export default {
     name: 'Cart',
     data() {
         return {
+            store,
             showForm: false, // Inizializza la visibilità del modulo a falso
             // dishes: [],
             cart: [], // Inizializza il carrello come un array vuoto
@@ -131,7 +133,7 @@ export default {
 </script>
 
 <template>
-    <div class="cart">
+    <div class="cart container">
         <h2>Carrello</h2>
         <table class="table">
             <thead>
@@ -146,7 +148,7 @@ export default {
             <tbody>
                 <tr v-for="(item, index) in cart" :key="index">
                     <td><img :src="item.image" :alt="item.name"></td>
-                    <td>{{ item.item }}</td>
+                    <td>{{ item.name }}</td>
                     <td>{{ item.price }} &euro;</td>
                     <td><input type="number" v-model.number="item.quantity" min="1" @change="updateQuantity(index)">
                     </td>
@@ -157,6 +159,9 @@ export default {
 
         <!-- Mostra il totale del carrello -->
         <p>Totale: {{ total.toFixed(2) }} &euro;</p>
+
+        <router-link :to="{ name: RestaurantArea, path: '/restaurants/' + store.restaurant_id }"
+            class="btn btn-secondary" type="button">Indietro</router-link>
 
         <!-- Pulsante per svuotare completamente il carrello -->
         <button class="btn btn-org" @click="clearCart">Svuota Carrello</button>
@@ -211,6 +216,9 @@ form {
 
 }
 
+.cart {
+    margin-top: 100px;
+}
 
 .dishes {
     width: 500px;
