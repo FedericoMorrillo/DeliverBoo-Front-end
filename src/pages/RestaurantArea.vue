@@ -51,13 +51,13 @@ export default {
             <div>
                 <router-link :to="{ name: Cart, path: '/cart' }" class="btn btn-primary" type="button"> <i
                         class="fa-solid fa-cart-shopping"></i><span></span>carrello</router-link>
-                <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+                <!-- <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
                     aria-labelledby="offcanvasWithBothOptionsLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="d-flex flex-wrap">
