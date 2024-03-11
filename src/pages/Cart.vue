@@ -22,29 +22,9 @@ export default {
         };
     },
     methods: {
-        getDishes() {
-            axios.get('http://localhost:8000/api/restaurants/1dishes').then((response) => {
-                this.dishes = response.data.results.dishes;
-            });
-        },
         showUserDataForm() {
             if (this.cart.length > 0) {
                 this.showForm = true; // Mostra il modulo dei dati dell'utente quando il pulsante "Checkout" viene premuto
-            }
-        },
-        addToCart(selectedDish) {
-            // Aggiunge il piatto selezionato al carrello solo se è selezionato e la quantità è maggiore di 0
-            if (selectedDish.selected && selectedDish.quantity > 0) {
-                this.cart.push({ item: selectedDish.name, quantity: selectedDish.quantity, price: selectedDish.price, image: selectedDish.image });
-                selectedDish.selected = false; // Resetta la selezione del piatto
-                selectedDish.quantity = 1; // Resetta la quantità del piatto
-                this.saveCart(); // Salva il carrello in localStorage
-            }
-        },
-        validateQuantity(dish) {
-            // Imposta la quantità minima a 1 se l'utente inserisce un valore minore
-            if (dish.quantity < 1) {
-                dish.quantity = 1;
             }
         },
         saveCart() {
