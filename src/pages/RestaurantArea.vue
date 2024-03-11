@@ -31,6 +31,9 @@ export default {
             axios.get('http://127.0.0.1:8000/api/restaurants/' + store.restaurant_id).then((response) => {
                 this.restaurant = response.data.results;
                 console.log(response);
+                this.restaurant.dishes.forEach(item => {
+                    item.quantity = 1;
+                });
             });
         },
 
@@ -75,7 +78,8 @@ export default {
                 </div>
                 <input type="number" min="1" v-model="item.quantity" class="form-control mt-3 mb-3">
                 <div>
-                    <button @click="addToCart(item)" class="btn btn-org">Aggiungi al carrello</button>
+                    <button @click="addToCart(item)" class="btn btn-org">Aggiungi al
+                        carrello</button>
                 </div>
             </div>
         </div>
