@@ -21,12 +21,12 @@ export default {
             return this.store.type = id;
         },
         getTypes() {
-            axios.get('http://127.0.0.1:8000/api/types/').then((response) => {
+            axios.get('http://localhost:8000/api/types/').then((response) => {
                 this.types = response.data.results;
             });
         },
         getRestaurants() {
-            axios.get('http://127.0.0.1:8000/api/restaurants/').then((response) => {
+            axios.get('http://localhost:8000/api/restaurants/').then((response) => {
                 this.restaurants = response.data.results;
                 this.filterRestaurants();
             });
@@ -82,7 +82,7 @@ export default {
     <!--/Tipologie-->
 
     <!--Ristoranti-->
-    <h3 class="text-center mt-4 lengtharray">Ristoranti trovati {{ filteredRestaurants.length }}:</h3>
+    <h3 class="text-center mt-4 lengtharray colorrestaurant">Ristoranti trovati {{ filteredRestaurants.length }}:</h3>
     <div class="d-flex flex-wrap container mb-3">
         <!-- Itera su ciascun tipo nell'array types -->
         <router-link class="restaurant-card rounded p-3 my-3" role="button" @click="setRestaurant(item.id)"
@@ -111,6 +111,9 @@ export default {
 .hoverimg {
     transform: perspective(1000px);
     transform-style: preserve-3d;
+}
+.colorrestaurant{
+    color: lightsalmon;
 }
 </style>
 

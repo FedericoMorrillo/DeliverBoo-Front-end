@@ -13,7 +13,7 @@ button.addEventListener("click", () => {
         lenghtarray.classList.add("color")     
     }
     document.body.style.backgroundImage = "none";
-    document.body.style.backgroundColor = "#3B413A";
+    document.body.style.backgroundColor = "#212529";
     button.classList.remove("on")
     button.classList.add("blocknone")
     button2.classList.remove("blocknone")
