@@ -10,10 +10,10 @@ button.addEventListener("click", () => {
     const lenghtarray = document.querySelector(".lengtharray");
     if (lenghtarray !== null) {
         lenghtarray.classList.remove("color2")
-        lenghtarray.classList.add("color")
+        lenghtarray.classList.add("color")     
     }
     document.body.style.backgroundImage = "none";
-    document.body.style.backgroundColor = "black";
+    document.body.style.backgroundColor = "#3B413A";
     button.classList.remove("on")
     button.classList.add("blocknone")
     button2.classList.remove("blocknone")
@@ -21,10 +21,12 @@ button.addEventListener("click", () => {
 });
 button2.addEventListener("click", () => {
     const lenghtarray = document.querySelector(".lengtharray");
+    const colordrop = document.querySelector(".restaurantdrop");
     if (lenghtarray !== null) {
 
         lenghtarray.classList.remove("color")
         lenghtarray.classList.add("color2")
+
     }
     const immagine = new Image();
     immagine.addEventListener('load', function () {
