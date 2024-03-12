@@ -119,8 +119,8 @@ export default {
                         <img v-if="item.image" :src="item.image" class="card-img-top" :alt="item.name">
                         <div class="card-body">
                             <div class="card-text text-center restaurant_name mb-3">{{ item.name }}</div>
-                            <div class="row row-cols-4">
-                                <div class="col" v-for="category in item.types">
+                            <div class="row row-cols-3 mx-0 g-2">
+                                <div class="col text-center" v-for="category in item.types">
                                     <span class="badge ms_badge" :key="category.id"
                                         :class="{ 'bg-success': selectedTypes.includes(category.id), 'bg-secondary': !selectedTypes.includes(category.id) }">
                                         {{ category.name }}
@@ -154,7 +154,7 @@ h4{
     font-size: 2rem;
 }
 .ms_badge{
-    font-size: 1.25rem;
+    font-size: 1.125rem;
 }
 .hoverimg:hover {
     transition: 0.5s ease-in-out;
