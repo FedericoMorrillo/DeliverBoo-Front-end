@@ -16,7 +16,6 @@ export default {
         }
     },
     methods: {
-
         setType(id) {
             return this.store.type = id;
         },
@@ -46,6 +45,17 @@ export default {
         setRestaurant(id) {
             return this.store.restaurant_id = id;
         },
+        toggleType(typeId) {
+            if (this.selectedTypes.includes(typeId)) {
+                // Se l'ID della tipologia è già presente nella lista selectedTypes, lo rimuovi
+                this.selectedTypes = this.selectedTypes.filter(id => id !== typeId);
+            } else {
+                // Altrimenti, lo aggiungi alla lista selectedTypes
+                this.selectedTypes.push(typeId);
+            }
+            // Una volta aggiornata la lista selectedTypes, chiami il metodo per filtrare i ristoranti
+            this.filterRestaurants();
+        }
     },
     created() {
         this.getTypes();
@@ -61,25 +71,25 @@ export default {
 <template>
     <!--Tipologie-->
     <div class="container">
-        <h4 class="lengtharray mt-4 my-3">attualmente ci sono {{ types.length }} tipi di Tipologie</h4>
+        <h4 class="lengtharray mt-4 my-3">Attualmente ci sono {{ types.length }} tipi di Tipologie</h4>
     </div>
 
     <div class="d-flex flex-wrap container mt-2 mb-4">
         <!-- Itera su ciascun tipo nell'array types -->
-        <div class="type-card rounded hoverimg  mb-5" v-for="item in types" :key="item.id">
-            <img :src="item.image" class="card-img-top" :alt="item.name">
-            <div class="card-body">
+        <div class="type-card rounded hoverimg mb-5" v-for="item in types" :key="item.id" @click="toggleType(item.id)">
+            <!-- Elemento cliccabile che avvolge l'intero contenuto della card -->
+            <div class="clickable card-body">
+                <img :src="item.image" class="card-img-top" :alt="item.name">
                 <div class="form-check">
+                    <input class="form-check-input" type="checkbox" :value="item.id" :id="'type-checkbox-' + item.id"
+                        v-model="selectedTypes" @change="filterRestaurants">
                     <label class="form-check-label" :for="'type-checkbox-' + item.id">
                         {{ item.name }}
                     </label>
-                    <input class="form-check-input" type="checkbox" :value="item.id" :id="'type-checkbox-' + item.id"
-                        v-model="selectedTypes" @change="filterRestaurants">
                 </div>
             </div>
         </div>
     </div>
-    <!--/Tipologie-->
 
     <!--Ristoranti-->
     <h3 class="text-center mt-4 lengtharray colorrestaurant">Ristoranti trovati {{ filteredRestaurants.length }}:</h3>
@@ -95,15 +105,12 @@ export default {
         </router-link>
     </div>
     <!--/Ristoranti-->
-
 </template>
 
 <style scoped lang="scss">
 .hoverimg:hover {
     transition: 0.5s ease-in-out;
-    // transform: translateZ(300px) translateY(20px);
     transform: scale(1.1);
-    transform: translateY(10px);
     background-color: #FFA500;
     box-shadow: none;
 }
@@ -112,8 +119,13 @@ export default {
     transform: perspective(1000px);
     transform-style: preserve-3d;
 }
-.colorrestaurant{
+
+.colorrestaurant {
     color: lightsalmon;
+}
+
+.clickable {
+    cursor: pointer;
 }
 </style>
 
