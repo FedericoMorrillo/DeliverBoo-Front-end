@@ -10,7 +10,7 @@ export default {}
 
 <template>
     <!--footer-->
-    <footer>
+    <footer class="mt-auto">
         <div class="container py-3">
             <div class="text-secondary">By Boolean #110</div>
         </div>
