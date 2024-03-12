@@ -42,6 +42,7 @@ export default {
           total: this.total
         }).then(response => {
           if (response.data.success) {
+            this.$emit('confirmOrder');
             alert('Pagamento effettuato con successo. ID Transazione: ' + response.data.transaction_id);
           } else {
             alert('Pagamento non riuscito: ' + response.data.message);
@@ -59,8 +60,10 @@ export default {
 
 <template>
   <div id="app">
-    <h1>Paga con Braintree</h1>
+    <h2>Paga con Braintree</h2>
     <div id="dropin-container"></div>
-    <button id="submit-button" @click="pay">Paga</button>
+    <div class="text-end mb-3">
+      <button id="submit-button" class="btn btn-success" @click="pay">Conferma e paga</button>
+    </div>
   </div>
 </template>

@@ -64,7 +64,7 @@ export default {
     <section class="container in-b stylesection">
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  torna indietro
+  <i class="fa-solid fa-right-to-bracket fa-rotate-180"></i>
 </button>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -78,8 +78,7 @@ export default {
         sei sicuro di voler tornare indietro e svuotare il carrello ?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">chiudi</button>
-        <a @click="clearcart() , clearcounter()" class="btn btn-secondary" href="/">svuota  e torna indietro</a>
+        <a @click="clearcart() , clearcounter()" class="btn btn-danger" href="/">svuota  e torna indietro</a>
       </div>
     </div>
   </div>
