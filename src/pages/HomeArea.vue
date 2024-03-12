@@ -17,33 +17,30 @@ export default {
 
 <template>
     <!--Jumbotron-->
-    <div class="jumbotron p-5 mt-5 my-4 bg-light rounded-3">
-
-        <!--title-->
-        <div class="my-5">
-            <h1 class="display-5 fw-bold align-self-center ps-4" id="myDivv">
-                QuackDelivery
+    <div class="jumbotron p-5 mt-5 bg-light">
+        <div class="card ms_card p-5">
+            <!--title-->
+            <h1 class="display-5 fw-bold align-self-center text-white">
+                Vuoi ordinare qualcosa al volo?
             </h1>
+            <!--/title-->
+
+            <h5 class="text-light fw-light my-5">Il traffico per le anatre non è un problema!</h5>
+
+            <!--btn jumbo-->
+            <div>
+                <a class="btn btn-org" href="#type-area" data-scroll="">Cosa vuoi mangiare?</a>
+            </div>
+            <!--/btn jumbo -->
         </div>
-        <!--/title-->
-
-        <!--description jumbo-->
-        <p class="col-md-8 fs-4">
-            Esplora un mondo di sapori e convenienza con QuackDelivery. Dalle deliziose pizzerie ai ristoranti esotici,
-            siamo
-            qui per portare il meglio della cucina direttamente a casa tua.
-        </p>
-        <!--/description jumbo -->
-
     </div>
     <!--/Jumbotron-->
 
-    <div class="content">
+    <!-- <div class="content">
         <div class="container">
 
-            <!--card container-->
             <div class="d-flex gap-5 mb-4">
-                <!--card-->
+
                 <div class="home-card p-3 rounded description">
                     <h4>Ordina in modo semplice e veloce</h4>
                     <p>
@@ -54,9 +51,8 @@ export default {
                         occupiamo del resto.
                     </p>
                 </div>
-                <!--/card-->
 
-                <!--card-->
+
                 <div class="home-card p-3 rounded description">
                     <h4>Consegna veloce e affidabile</h4>
                     <p>
@@ -65,24 +61,19 @@ export default {
                         affidabile rete di consegna, puoi gustare il tuo cibo preferito senza uscire di casa.
                     </p>
                 </div>
-                <!--/card-->
             </div>
-            <!--/card container-->
 
-            <!--center button container-->
             <div class="d-flex justify-content-center">
-                <!--card-->
                 <div class="bg-white order p-3 rounded description">
                     <h4>Ordina ora!</h4>
                     <p>
                         Scegli la tipologia di ristoranti per visualizzare i ristoranti di quel genere
                     </p>
                 </div>
-                <!--/card-->
             </div>
-            <!--/center button container-->
         </div>
-    </div>
+    </div> -->
+
     <TypeArea />
 </template>
 
@@ -91,14 +82,9 @@ export default {
 <!--CSS-->
 
 <style scoped lang="scss">
-
-.description:hover{
+.description:hover {
     transform: scale(1.1);
     transition: 0.8s;
 }
-
-
-
-
 </style>
 <!--/CSS-->
