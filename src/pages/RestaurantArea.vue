@@ -100,31 +100,6 @@ export default {
                     <i class="fa-solid fa-cart-shopping"></i><span></span>
                         {{ counter }}
                         carrello
-                        <div v-if="counter <= 10">
-                          <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                          <div class="progress-bar" style="width: 10%">1%</div>
-                          </div>
-                       </div>
-                       <div v-else-if="counter <=20 ">
-                          <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                          <div class="progress-bar" style="width: 30%">30%</div>
-                          </div>
-                       </div>
-                       <div v-else-if="counter <= 30">
-                          <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                          <div class="progress-bar" style="width: 50%">50%</div>
-                          </div>
-                       </div>
-                       <div v-else-if="counter <= 40">
-                          <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                          <div class="progress-bar" style="width: 80%">80%</div>
-                          </div>
-                       </div>
-                       <div v-else>
-                          <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                          <div class="progress-bar" style="width: 100%">100%</div>
-                          </div>
-                       </div>
                     </router-link>
                 <!-- <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
                     aria-labelledby="offcanvasWithBothOptionsLabel">
