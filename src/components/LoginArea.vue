@@ -38,15 +38,7 @@ export default {
                     <a class="hovernav" href="http://127.0.0.1:8000/login">Login</a>
                 </li>
                 <li class="pe-2 register scale">
-                    <a class="hovernav" href="http://127.0.0.1:8000/register">Register</a>
-                </li>
-                <li>
-                        <div class="darkmode-on">
-                            <button class="dark">
-                            <i class="fa-solid fa-moon"></i> dark mode</button>
-                        </div>
-                    <button class=" light blocknone">
-                        <i class="fa-regular fa-sun"></i> light mode</button>
+                    <a class="hovernav" href="http://127.0.0.1:8000/register">Registrati</a>
                 </li>
             </ul>
             <!--/login-register-->
@@ -59,6 +51,10 @@ export default {
 <!--CSS-->
 
 <style scoped lang="scss">
+
+header{
+    font-size: 1.5rem;
+}
 .hovernav:hover{
     color: white;
 }

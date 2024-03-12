@@ -69,52 +69,93 @@ export default {
 <!--HTML-->
 
 <template>
-    <!--Tipologie-->
-    <div class="container">
-        <h4 class="lengtharray mt-4 my-3">Attualmente ci sono {{ types.length }} tipi di Tipologie</h4>
-    </div>
+    <div id="type-area" class="container">
+        <h2 class="text-center mb-5">
+                            <span class=" text-org">
+            Scegli cosa vuoi e noi te lo portiamo!
+                            </span>
+        </h2>
+        <!--Tipologie-->
+        <div>
+            <h4 class="lengtharray mt-4 my-3">
+                <span class=" text-org">
+                Attualmente sono disponibili {{ types.length }} Tipologie di Ristoranti
+                </span>
+            </h4>
+        </div>
 
-    <div class="d-flex flex-wrap container mt-2 mb-4">
-        <!-- Itera su ciascun tipo nell'array types -->
-        <div class="type-card rounded hoverimg mb-5" v-for="item in types" :key="item.id" @click="toggleType(item.id)"
-            :class="{ 'bg-success': selectedTypes.includes(item.id) }">
-            <div class="clickable card-body">
-                <img :src="item.image" class="card-img-top" :alt="item.name">
-                <div class="form-check">
-                    <input class="visually-hidden form-check-input" type="checkbox" :value="item.id"
-                        :id="'type-checkbox-' + item.id" v-model="selectedTypes" @change="filterRestaurants">
-                    <label class="form-check-label" :for="'type-checkbox-' + item.id">
-                        {{ item.name }}
-                    </label>
+        <div class="row row-cols-4 g-4">
+            <!-- Itera su ciascun tipo nell'array types -->
+            <div class="col" v-for="item in types">
+                <div class="type-card rounded hoverimg" :key="item.id" @click="toggleType(item.id)"
+                    :class="{ 'bg-orng': selectedTypes.includes(item.id) }">
+                    <div class="clickable card-body">
+                        <img :src="item.image" class="card-img-top" :alt="item.name">
+                        <div class="form-check text-center py-2">
+                            <input class="visually-hidden form-check-input" type="checkbox" :value="item.id"
+                                :id="'type-checkbox-' + item.id" v-model="selectedTypes" @change="filterRestaurants">
+                            <label class="form-check-label pe-5" :for="'type-checkbox-' + item.id">
+                                {{ item.name }}
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--Ristoranti-->
-    <h3 class="text-center mt-4 lengtharray colorrestaurant">Ristoranti trovati {{ filteredRestaurants.length }}:</h3>
-    <div class="d-flex flex-wrap container mb-3">
-        <!-- Itera su ciascun tipo nell'array types -->
-        <router-link class="restaurant-card rounded p-3 my-3" role="button" @click="setRestaurant(item.id)"
-            v-for="item in filteredRestaurants" :key="item.id"
-            :to="{ name: RestaurantArea, path: '/restaurants/' + item.id }">
-            <img :src="item.image" class="card-img-top" :alt="item.name">
-            <div class="card-body">
-                <div class="card-text text-center">{{ item.name }}</div>
-                <div class="d-flex flex-wrap">
-                    <span v-if="item.types" class="badge me-1 my-1"
-                        :class="{ 'bg-success': selectedTypes.includes(category.id), 'bg-secondary': !selectedTypes.includes(category.id) }"
-                        v-for="category in item.types" :key="category.id">
-                        {{ category.name }}
-                    </span>
+        <!--Ristoranti-->
+        <div class="mt-5">
+            <h4 class="lengtharray pb-2">
+                <span class=" text-org">
+                Ristoranti trovati: {{ filteredRestaurants.length }}
+                </span>
+            </h4>
+
+            <div class="row row-cols-3">
+                <!-- Itera su ciascun tipo nell'array types -->
+                <div class="col" v-for="item in filteredRestaurants">
+                    <router-link class="restaurant-card card rounded" role="button" @click="setRestaurant(item.id)"
+                        :key="item.id" :to="{ name: RestaurantArea, path: '/restaurants/' + item.id }">
+                        <img v-if="item.image" :src="item.image" class="card-img-top" :alt="item.name">
+                        <div class="card-body">
+                            <div class="card-text text-center restaurant_name mb-3">{{ item.name }}</div>
+                            <div class="row row-cols-4">
+                                <div class="col" v-for="category in item.types">
+                                    <span class="badge ms_badge" :key="category.id"
+                                        :class="{ 'bg-success': selectedTypes.includes(category.id), 'bg-secondary': !selectedTypes.includes(category.id) }">
+                                        {{ category.name }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </router-link>
                 </div>
             </div>
-        </router-link>
+        </div>
+        <!--/Ristoranti-->
     </div>
-    <!--/Ristoranti-->
 </template>
 
 <style scoped lang="scss">
+#type-area {
+    padding: 150px 0;
+    // height: 100vh;
+}
+
+h2 {
+    font-size: 4rem;
+}
+
+h4{
+    font-size: 2rem;
+}
+
+.restaurant_name{
+    font-size: 2rem;
+}
+.ms_badge{
+    font-size: 1.25rem;
+}
 .hoverimg:hover {
     transition: 0.5s ease-in-out;
     transform: scale(1.1);
@@ -127,12 +168,12 @@ export default {
     transform-style: preserve-3d;
 }
 
-.colorrestaurant {
-    color: lightsalmon;
-}
-
 .clickable {
     cursor: pointer;
+}
+
+.bg-orng {
+    background-color: #FFA500;
 }
 </style>
 

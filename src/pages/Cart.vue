@@ -132,7 +132,7 @@ export default {
             </thead>
             <tbody>
                 <tr v-for="(item, index) in cart" :key="index">
-                    <td><img :src="item.image" :alt="item.name"></td>
+                    <td><img v-show="item.image" :src="item.image" :alt="item.name"></td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.price }} &euro;</td>
                     <td><input type="number" v-model.number="item.quantity" min="1" @change="updateQuantity(index)">
