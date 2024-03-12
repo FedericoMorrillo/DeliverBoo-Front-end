@@ -1,116 +1,120 @@
 <script>
 import axios from 'axios';
 import { store } from '../store'
+import CheckoutComponent from '../components/CheckoutComponent.vue';
 export default {
     name: 'Cart',
-    data() {
-        return {
-            store,
-            showForm: false, // Inizializza la visibilità del modulo a falso
-            // dishes: [],
-            cart: [], // Inizializza il carrello come un array vuoto
-            selectedProductIndex: null, // Indice del prodotto selezionato dall'utente
-            quantity: 1, // Inizializza la quantità predefinita del prodotto
-            total: 0, // Inizializza il totale dei prodotti nel carrello
-            userData: {
-                name: '',
-                surname: '',
-                phone: '',
-                email: '',
-                address: ''
-            }
-        };
+    components: {
+        CheckoutComponent,
     },
-    methods: {
-        showUserDataForm() {
-            if (this.cart.length > 0) {
-                this.showForm = true; // Mostra il modulo dei dati dell'utente quando il pulsante "Checkout" viene premuto
-            }
-        },
-        saveCart() {
-            // Salva il carrello in localStorage
-            localStorage.setItem('cart', JSON.stringify(this.cart));
-            // Calcola il totale dei prodotti nel carrello
-            this.calculateTotal();
-        },
-        removeFromCart(index) {
-            // Rimuove un elemento dal carrello
-            this.cart.splice(index, 1);
-            this.saveCart(); // Salva il carrello in localStorage
-        },
-        updateQuantity() {
-            // Aggiorna la quantità di un elemento nel carrello
-            this.saveCart(); // Salva il carrello in localStorage
-        },
-        clearCart() {
-            // Svuota completamente il carrello
-            this.cart = [];
-            localStorage.removeItem('cart'); // Rimuovi il carrello da localStorage
-            this.calculateTotal(); // Aggiorna il totale
-        },
-        calculateTotal() {
-            // Calcola il totale dei prodotti nel carrello
-            this.total = this.cart.reduce((acc, item) => acc + (item.price * item.quantity || 0), 0);
-        },
-        validateUserData() {
-            return (
-                this.userData.name !== '' &&
-                this.userData.surname !== '' &&
-                this.userData.phone !== '' &&
-                this.userData.email !== '' &&
-                this.userData.address !== ''
-            );
-        },
-
-        clearUserData() {
-            this.userData = {
-                name: '',
-                surname: '',
-                phone: '',
-                email: '',
-                address: ''
+        data() {
+            return {
+                store,
+                showForm: false, // Inizializza la visibilità del modulo a falso
+                // dishes: [],
+                cart: [], // Inizializza il carrello come un array vuoto
+                selectedProductIndex: null, // Indice del prodotto selezionato dall'utente
+                quantity: 1, // Inizializza la quantità predefinita del prodotto
+                total: 0, // Inizializza il totale dei prodotti nel carrello
+                userData: {
+                    name: '',
+                    surname: '',
+                    phone: '',
+                    email: '',
+                    address: ''
+                }
             };
         },
-        confirmOrder() {
-            // Assicurati che il carrello non sia vuoto e che tutti i campi utente siano compilati
-            if (this.cart.length > 0 && this.validateUserData()) {
-                const orderData = {
-                    cart: this.cart,
-                    total: this.total,
-                    userData: this.userData
+        methods: {
+            showUserDataForm() {
+                if (this.cart.length > 0) {
+                    this.showForm = true; // Mostra il modulo dei dati dell'utente quando il pulsante "Checkout" viene premuto
+                }
+            },
+            saveCart() {
+                // Salva il carrello in localStorage
+                localStorage.setItem('cart', JSON.stringify(this.cart));
+                // Calcola il totale dei prodotti nel carrello
+                this.calculateTotal();
+            },
+            removeFromCart(index) {
+                // Rimuove un elemento dal carrello
+                this.cart.splice(index, 1);
+                this.saveCart(); // Salva il carrello in localStorage
+            },
+            updateQuantity() {
+                // Aggiorna la quantità di un elemento nel carrello
+                this.saveCart(); // Salva il carrello in localStorage
+            },
+            clearCart() {
+                // Svuota completamente il carrello
+                this.cart = [];
+                localStorage.removeItem('cart'); // Rimuovi il carrello da localStorage
+                this.calculateTotal(); // Aggiorna il totale
+            },
+            calculateTotal() {
+                // Calcola il totale dei prodotti nel carrello
+                this.total = this.cart.reduce((acc, item) => acc + (item.price * item.quantity || 0), 0);
+            },
+            validateUserData() {
+                return (
+                    this.userData.name !== '' &&
+                    this.userData.surname !== '' &&
+                    this.userData.phone !== '' &&
+                    this.userData.email !== '' &&
+                    this.userData.address !== ''
+                );
+            },
+
+            clearUserData() {
+                this.userData = {
+                    name: '',
+                    surname: '',
+                    phone: '',
+                    email: '',
+                    address: ''
                 };
-                console.log(orderData);
-                this.showForm = false;
-                axios.post('http://localhost:8000/api/orders', JSON.stringify(orderData), {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).then(response => {
+            },
+            confirmOrder() {
+                // Assicurati che il carrello non sia vuoto e che tutti i campi utente siano compilati
+                if (this.cart.length > 0 && this.validateUserData()) {
+                    const orderData = {
+                        cart: this.cart,
+                        total: this.total,
+                        userData: this.userData
+                    };
+                    console.log(orderData);
+                    this.showForm = false;
+                    axios.post('http://localhost:8000/api/orders', JSON.stringify(orderData), {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(response => {
                         // Il server ha confermato l'ordine e ha salvato i dati nel database
                         console.log('Ordine confermato:', response.data);
                         // Puoi resettare il carrello e i dati utente dopo che l'ordine è stato confermato
                         this.clearCart();
                         this.clearUserData();
                     })
-                    .catch(error => {
-                        console.error('Errore durante la conferma dell\'ordine:', error);
-                    });
-            } else {
-                console.warn('Impossibile confermare un ordine vuoto o con dati utente incompleti.');
-            }
+                        .catch(error => {
+                            console.error('Errore durante la conferma dell\'ordine:', error);
+                        });
+                } else {
+                    console.warn('Impossibile confermare un ordine vuoto o con dati utente incompleti.');
+                }
+            },
         },
-    },
-    created() {
-        // this.getDishes();
+        created() {
+            // this.getDishes();
 
-        // Carica il carrello dal localStorage all'avvio dell'applicazione
-        const savedCart = localStorage.getItem('cart');
-        if (savedCart) {
-            this.cart = JSON.parse(savedCart);
-            this.calculateTotal(); // Calcola il totale dei prodotti nel carrello
-        };
+            // Carica il carrello dal localStorage all'avvio dell'applicazione
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                this.cart = JSON.parse(savedCart);
+                this.calculateTotal(); // Calcola il totale dei prodotti nel carrello
+            };
+        }
     }
-}
 </script>
 
 <template>
@@ -175,6 +179,8 @@ export default {
             <!-- Pulsante per confermare ordine -->
             <button class="btn btn-org" type="submit">Conferma Ordine</button>
         </form>
+
+        <CheckoutComponent/>
 
     </div>
 
