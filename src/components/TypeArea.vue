@@ -55,7 +55,7 @@ export default {
             }
             // Una volta aggiornata la lista selectedTypes, chiami il metodo per filtrare i ristoranti
             this.filterRestaurants();
-        }
+        },
     },
     created() {
         this.getTypes();
@@ -102,7 +102,9 @@ export default {
             <div class="card-body">
                 <div class="card-text text-center">{{ item.name }}</div>
                 <div class="d-flex flex-wrap">
-                    <span class="badge text-bg-secondary me-1 my-1" v-for="category in item.types">
+                    <span v-if="item.types" class="badge me-1 my-1"
+                        :class="{ 'bg-success': selectedTypes.includes(category.id), 'bg-secondary': !selectedTypes.includes(category.id) }"
+                        v-for="category in item.types" :key="category.id">
                         {{ category.name }}
                     </span>
                 </div>
