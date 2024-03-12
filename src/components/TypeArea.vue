@@ -101,6 +101,11 @@ export default {
             <img :src="item.image" class="card-img-top" :alt="item.name">
             <div class="card-body">
                 <div class="card-text text-center">{{ item.name }}</div>
+                <div class="d-flex flex-wrap">
+                    <span class="badge text-bg-secondary me-1 my-1" v-for="category in item.types">
+                        {{ category.name }}
+                    </span>
+                </div>
             </div>
         </router-link>
     </div>
