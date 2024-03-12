@@ -180,7 +180,7 @@ export default {
             <button class="btn btn-org" type="submit">Conferma Ordine</button>
         </form>
 
-        <CheckoutComponent/>
+        <CheckoutComponent :total="this.total"/>
 
     </div>
 

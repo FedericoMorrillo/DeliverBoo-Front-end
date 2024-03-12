@@ -6,9 +6,9 @@ export default {
   data() {
     return {
       dropinInstance: null,
-      total: '0.00' // Assicurati di aggiornare questo valore con il totale del carrello
     }
   },
+  props: ['total',],
   mounted() {
     // Ottieni il client token dal server
     axios.get('http://localhost:8000/api/payment/token').then(response => {
