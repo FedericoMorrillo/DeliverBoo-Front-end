@@ -76,13 +76,13 @@ export default {
 
     <div class="d-flex flex-wrap container mt-2 mb-4">
         <!-- Itera su ciascun tipo nell'array types -->
-        <div class="type-card rounded hoverimg mb-5" v-for="item in types" :key="item.id" @click="toggleType(item.id)">
-            <!-- Elemento cliccabile che avvolge l'intero contenuto della card -->
+        <div class="type-card rounded hoverimg mb-5" v-for="item in types" :key="item.id" @click="toggleType(item.id)"
+            :class="{ 'bg-success': selectedTypes.includes(item.id) }">
             <div class="clickable card-body">
                 <img :src="item.image" class="card-img-top" :alt="item.name">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" :value="item.id" :id="'type-checkbox-' + item.id"
-                        v-model="selectedTypes" @change="filterRestaurants">
+                    <input class="visually-hidden form-check-input" type="checkbox" :value="item.id"
+                        :id="'type-checkbox-' + item.id" v-model="selectedTypes" @change="filterRestaurants">
                     <label class="form-check-label" :for="'type-checkbox-' + item.id">
                         {{ item.name }}
                     </label>
