@@ -111,6 +111,10 @@ p {
 //Home
 
 //TypeArea
+.type-card-all {
+    width: calc(100% / 8 - 10px);
+}
+
 .type-card {
     background-color: white;
     border: 2px solid #FFA500;
@@ -118,7 +122,7 @@ p {
     object-fit: cover;
 
     .form-check {
-        font-size: 2rem;
+        font-size: 18px;
     }
 }
 
@@ -132,6 +136,7 @@ p {
 }
 
 .restaurant-card {
+    margin: 0 10px 0 10px;
     background-color: white;
     border: 2px solid #FFA500;
     box-shadow: rgba(0, 0, 0, 0.356) .625rem .625rem;
