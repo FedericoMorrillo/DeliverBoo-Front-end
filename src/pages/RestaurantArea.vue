@@ -10,6 +10,7 @@ export default {
             restaurant: [],
             cart: JSON.parse(localStorage.getItem('cart')) || [],
             store,
+            total: 0, // Inizializza il totale dei prodotti nel carrello
         }
     },
     methods: {
@@ -23,7 +24,6 @@ export default {
             store.counter = [];
         },
         addToCart(product) {
-            // console.log(product);
             const existingProduct = this.cart.find(item => item.id === product.id);
 
             if (existingProduct) {
@@ -33,13 +33,12 @@ export default {
             }
             localStorage.setItem('cart', JSON.stringify(this.cart));
             store.counter += product.quantity; localStorage.setItem('counter', JSON.stringify(store.counter));
-            // console.log(this.cart)
+            this.calculateTotal();
         },
 
         getRestaurant() {
             axios.get('http://localhost:8000/api' + this.$route.path).then((response) => {
                 this.restaurant = response.data.results;
-                // console.log(response);
                 this.restaurant.dishes.forEach(item => {
                     item.quantity = 1;
                 });
@@ -54,11 +53,15 @@ export default {
                 return item.quantity--
             }
         },
-
+        calculateTotal() {
+            // Calcola il totale dei prodotti nel carrello
+            this.total = this.cart.reduce((acc, item) => acc + (item.price * item.quantity || 0), 0);
+        },
     },
     created() {
         this.getRestaurant();
         store.counter = JSON.parse(localStorage.getItem('counterr')) || 0;
+        this.calculateTotal();
     }
 }
 </script>
@@ -117,12 +120,35 @@ export default {
                 <strong class="px-3 py-2 rounded btn-org mx-3 fs-3">Menù</strong>
             </div>
             <div class="ms-auto">
-                <router-link :to="{ name: Cart, path: '/cart' }" class="btn btncart position-relative" type="button">
-                    <i class="fa-solid fa-cart-shopping fs-1"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary fs-5">
-                        {{ store.counter }}
-                    </span>
-                </router-link>
+                <!-- Anteprima carrello -->
+                <div class="dropdown">
+                    <button type="button" class="btn btncart position-relative dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                        <i class="fa-solid fa-cart-shopping fs-1"></i>
+                        <span
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary fs-5">
+                            {{ store.counter }}
+                        </span>
+                    </button>
+                    <div class="dropdown-menu p-4 cart-preview">
+                        <ul class="p-0">
+                            <li v-for="item in cart" class="border-bottom py-2 d-flex gap-2">
+                                <img :src="item.image" :alt="item.name" class="cart-thumb">
+                                <div>
+                                    <h5>{{ item.name }}</h5>
+                                    &euro;{{ item.price }} x {{ item.quantity }}
+                                </div>
+                            </li>
+                            <li class="py-2">
+                                Totale: {{ total.toFixed(2) }} &euro;
+                            </li>
+                        </ul>
+                        <router-link :to="{ name: Cart, path: '/cart' }" class="btn btn-primary" type="button">
+                            Vai al carrello
+                        </router-link>
+                    </div>
+                </div>
+                <!-- Anteprima carrello -->
             </div>
             <!-- <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
                     aria-labelledby="offcanvasWithBothOptionsLabel">
@@ -138,7 +164,7 @@ export default {
         <div class="row row-cols-2 g-4">
             <!-- Itera su ciascun piatto nell'array -->
             <div class="col" v-for="item in restaurant.dishes">
-                <div class="restaurant-card rounded p-3 my-3">
+                <div class="restaurant-card rounded p-3 my-3 h-100">
                     <img v-if="item.image" :src="item.image" class="card-img-top" :alt="item.name">
                     <div class="card-body">
                         <div class="row fs-4">
