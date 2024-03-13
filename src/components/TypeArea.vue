@@ -71,15 +71,15 @@ export default {
 <template>
     <div id="type-area" class="container">
         <h2 class="text-center mb-5">
-                            <span class=" text-org">
-            Scegli cosa vuoi e noi te lo portiamo!
-                            </span>
+            <span class=" text-org">
+                Scegli cosa vuoi e noi te lo portiamo!
+            </span>
         </h2>
         <!--Tipologie-->
         <div>
             <h4 class="lengtharray mt-4 my-3">
                 <span class=" text-org">
-                Attualmente sono disponibili {{ types.length }} Tipologie di Ristoranti
+                    Attualmente sono disponibili {{ types.length }} Tipologie di Ristoranti
                 </span>
             </h4>
         </div>
@@ -107,7 +107,7 @@ export default {
         <div class="mt-5">
             <h4 class="lengtharray pb-2">
                 <span class=" text-org">
-                Ristoranti trovati: {{ filteredRestaurants.length }}
+                    Ristoranti trovati: {{ filteredRestaurants.length }}
                 </span>
             </h4>
 
@@ -146,16 +146,18 @@ h2 {
     font-size: 4rem;
 }
 
-h4{
+h4 {
     font-size: 2rem;
 }
 
-.restaurant_name{
+.restaurant_name {
     font-size: 2rem;
 }
-.ms_badge{
+
+.ms_badge {
     font-size: 1.125rem;
 }
+
 .hoverimg:hover {
     transition: 0.5s ease-in-out;
     transform: scale(1.1);

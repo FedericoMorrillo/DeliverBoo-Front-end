@@ -59,11 +59,11 @@ export default {
 </script>
 
 <template>
-  <div id="app">
+  <div id="app" class="d-flex flex-column h-100">
     <h2>Paga con Braintree</h2>
     <div id="dropin-container"></div>
-    <div class="text-end mb-3">
-      <button id="submit-button" class="btn btn-success" @click="pay">Conferma e paga</button>
+    <div class="text-end mt-auto">
+      <button id="submit-button" class="btn btn-success fs-4" @click="pay">Conferma e paga</button>
     </div>
   </div>
 </template>
