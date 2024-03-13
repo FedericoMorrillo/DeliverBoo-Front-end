@@ -3,10 +3,7 @@
 @import 'utils';
 @import 'header';
 
-
 //reset
-
-
 * {
     margin: 0;
     padding: 0;
@@ -141,3 +138,14 @@ p {
 }
 
 //RestaurantArea
+
+// cart preview
+.cart-thumb {
+    width: 4.375rem;
+}
+
+.cart-preview {
+    width: 18.75rem;
+}
+
+// cart preview

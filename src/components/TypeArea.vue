@@ -116,7 +116,7 @@ export default {
             <div class="row row-cols-3">
                 <!-- Itera su ciascun tipo nell'array types -->
                 <div class="col" v-for="item in filteredRestaurants">
-                    <router-link class="restaurant-card card rounded" role="button" @click="setRestaurant(item)"
+                    <router-link class="restaurant-card card rounded h-100" role="button" @click="setRestaurant(item)"
                         :key="item.id" :to="{ name: RestaurantArea, path: '/restaurants/' + item.slug }">
                         <img v-if="item.image" :src="item.image" class="card-img-top" :alt="item.name">
                         <div class="card-body">
