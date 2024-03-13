@@ -79,7 +79,7 @@ export default {
         </h2>
         <!--Tipologie-->
         <div>
-            <h4 class="lengtharray mt-4 my-5">
+            <h4 class="lengtharray mt-4 my-5 text-center">
                 <span class=" text-org">
                     Attualmente sono disponibili {{ types.length }} Tipologie di Ristoranti
                 </span>
@@ -123,12 +123,11 @@ export default {
                     <div class="card-body">
                         <div class="card-text text-center restaurant_name mb-3">{{ item.name }}</div>
                         <div class="row row-cols-3 mx-0 g-2">
-                            <div class="col text-center" v-for="category in item.types">
-                                <span class="badge ms_badge" :key="category.id"
-                                    :class="{ 'bg-success': selectedTypes.includes(category.id), 'bg-secondary': !selectedTypes.includes(category.id) }">
-                                    {{ category.name }}
-                                </span>
-                            </div>
+                            <span class="badge ms_badge col text-center" :key="category.id"
+                                v-for="category in item.types"
+                                :class="{ 'bg-success': selectedTypes.includes(category.id), 'bg-secondary': !selectedTypes.includes(category.id) }">
+                                {{ category.name }}
+                            </span>
                         </div>
                     </div>
                 </router-link>
@@ -155,8 +154,14 @@ h4 {
     font-size: 2rem;
 }
 
+.badge {
+    width: calc(100% / 2 - 10px);
+    margin: 5px 5px;
+    padding: 5px 10px;
+}
+
 .ms_badge {
-    font-size: 1.125rem;
+    font-size: 14px;
 }
 
 .hoverimg:hover {
@@ -195,6 +200,10 @@ h4 {
     h4 {
         text-align: center;
     }
+
+    .ms_badge {
+        font-size: 10px;
+    }
 }
 
 @media screen and (max-width:992px) {
@@ -217,6 +226,10 @@ h4 {
             font-size: 14px;
         }
     }
+
+    .restaurant-card {
+        width: calc(100% / 3 - 20px);
+    }
 }
 
 @media screen and (max-width:768px) {
@@ -232,6 +245,18 @@ h4 {
         width: calc(100% / 4 - 20px);
 
 
+    }
+
+    .restaurant-card {
+        width: calc(100% / 2 - 20px);
+    }
+
+}
+
+@media screen and (max-width:576px) {
+    .restaurant-card {
+        width: calc(100% / 1 - 150px);
+        margin: 20px auto;
     }
 
 }
