@@ -115,22 +115,23 @@ export default {
 
             <div class="row row-cols-3">
                 <!-- Itera su ciascun tipo nell'array types -->
-
-                <router-link class="col restaurant-card card rounded h-100" role="button" @click="setRestaurant(item)"
-                    v-for="item in filteredRestaurants" :key="item.id"
-                    :to="{ name: RestaurantArea, path: '/restaurants/' + item.slug }">
-                    <img v-if="item.image" :src="item.image" class="card-img-top" :alt="item.name">
-                    <div class="card-body">
-                        <div class="card-text text-center restaurant_name mb-3">{{ item.name }}</div>
-                        <div class="row row-cols-3 mx-0 g-2">
-                            <span class="badge ms_badge col text-center" :key="category.id"
-                                v-for="category in item.types"
-                                :class="{ 'bg-success': selectedTypes.includes(category.id), 'bg-secondary': !selectedTypes.includes(category.id) }">
-                                {{ category.name }}
-                            </span>
+                <div class="col-sm-6 col-4 col-lg-3 my-3 gap-2" v-for="item in filteredRestaurants">
+                    <router-link class="restaurant-card card rounded h-100" role="button" @click="setRestaurant(item)"
+                        :key="item.id" :to="{ name: RestaurantArea, path: '/restaurants/' + item.slug }">
+                        <img v-if="item.image" :src="item.image" class="card-img-top px-4" :alt="item.name">
+                        <div class="card-body">
+                            <div class="card-text text-center restaurant_name mb-3">{{ item.name }}</div>
+                            <div class="row row-cols-3 mx-0 g-2">
+                                <span class="badge ms_badge col text-center" :key="category.id"
+                                    v-for="category in item.types"
+                                    :class="{ 'bg-success': selectedTypes.includes(category.id), 'bg-secondary': !selectedTypes.includes(category.id) }">
+                                    {{ category.name }}
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                </router-link>
+                    </router-link>
+                </div>
+
             </div>
         </div>
         <!--/Ristoranti-->
@@ -215,20 +216,10 @@ h4 {
         font-size: 26px;
     }
 
-    .type-card-all {
-        width: calc(100% / 4 - 20px);
-
-
-    }
-
     .type-card {
         .form-check-label {
             font-size: 14px;
         }
-    }
-
-    .restaurant-card {
-        width: calc(100% / 3 - 20px);
     }
 }
 
@@ -247,17 +238,6 @@ h4 {
 
     }
 
-    .restaurant-card {
-        width: calc(100% / 2 - 20px);
-    }
-
-}
-
-@media screen and (max-width:576px) {
-    .restaurant-card {
-        width: calc(100% / 1 - 150px);
-        margin: 20px auto;
-    }
 
 }
 </style>
