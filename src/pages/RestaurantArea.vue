@@ -83,9 +83,13 @@ export default {
         <div class="d-flex align-items-center">
             <!-- Button trigger modal -->
             <div>
-                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button class="btn btn-secondary" v-if="this.cart.length > 0" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
                     <i class="fa-solid fa-right-to-bracket fa-rotate-180 fs-2"></i>
                 </button>
+                <a class="btn btn-secondary" href="/" v-else>
+                    <i class="fa-solid fa-right-to-bracket fa-rotate-180 fs-2"></i>
+                </a>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
