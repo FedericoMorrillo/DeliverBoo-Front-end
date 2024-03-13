@@ -71,7 +71,7 @@ export default {
 <!--HTML-->
 
 <template>
-    <div id="type-area" class="container">
+    <div id="type-area" class="container content">
         <h2 class="text-center mb-5">
             <span class=" text-org">
                 Scegli cosa vuoi e noi te lo portiamo!
@@ -79,6 +79,7 @@ export default {
         </h2>
         <!--Tipologie-->
         <div>
+            
             <h4 class="lengtharray mt-4 my-5">
                 <span class=" text-org">
                     Attualmente sono disponibili {{ types.length }} Tipologie di Ristoranti
