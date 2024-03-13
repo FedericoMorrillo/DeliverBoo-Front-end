@@ -138,8 +138,7 @@ export default {
 
 <style scoped lang="scss">
 #type-area {
-    padding: 150px 0;
-    // height: 100vh;
+    padding: 75px 0;
 }
 
 h2 {
