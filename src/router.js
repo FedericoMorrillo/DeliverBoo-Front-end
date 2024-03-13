@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeArea from "./pages/HomeArea.vue";
 import RestaurantArea from "./pages/RestaurantArea.vue";
-import Cart from './pages/Cart.vue';
+import Cart from "./pages/Cart.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -12,7 +12,7 @@ const router = createRouter({
       component: HomeArea,
     },
     {
-      path: "/restaurants/:id",
+      path: "/restaurants/:slug",
       name: "RestaurantArea",
       component: RestaurantArea,
     },

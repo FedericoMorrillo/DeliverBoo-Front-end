@@ -37,7 +37,7 @@ export default {
         },
 
         getRestaurant() {
-            axios.get('http://localhost:8000/api/restaurants/' + store.restaurant_id).then((response) => {
+            axios.get('http://localhost:8000/api' + this.$route.path).then((response) => {
                 this.restaurant = response.data.results;
                 // console.log(response);
                 this.restaurant.dishes.forEach(item => {
