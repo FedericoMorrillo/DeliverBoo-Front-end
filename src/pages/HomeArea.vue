@@ -17,7 +17,7 @@ export default {
 
 <template>
     <!--Jumbotron-->
-    <div class="jumbotron p-5 mt-5 bg-light">
+    <div class="jumbotron p-5 bg-light">
         <div class="card ms_card p-5">
             <!--title-->
             <h1 class="display-5 fw-bold align-self-center text-white">

@@ -27,8 +27,10 @@ export default {
 <template>
   <div id="giga-container" class="d-flex flex-column">
     <LoginArea />
-    <router-view></router-view>
-    <FooterArea />
+    <main>
+      <router-view></router-view>
+      <FooterArea />
+    </main>
   </div>
 </template>
 
