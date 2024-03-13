@@ -147,7 +147,7 @@ export default {
                             </div>
                         </div>
                     </div>
-                    <div class="row align-items-center text-center mt-4">
+                    <div class="row align-items-center text-center mt-4" v-if="item.availability">
                         <div class="col col-3 text-end fs-4"><strong>Quantità:</strong></div>
                         <div class="col col-4 text-start">
                             <button class="btn btn-secondary" @click="minusQuantity(item)"
@@ -164,6 +164,9 @@ export default {
                                 Aggiungi al carrello
                             </button>
                         </div>
+                    </div>
+                    <div v-else class="text-center fs-5">
+                        <span class="badge text-bg-secondary">Prodotto non disponibile</span>
                     </div>
                 </div>
             </div>
