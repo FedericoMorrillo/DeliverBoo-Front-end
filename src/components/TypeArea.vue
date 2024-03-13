@@ -42,8 +42,10 @@ export default {
             }
             console.log("Filtered Restaurants:", this.filteredRestaurants);
         },
-        setRestaurant(id) {
-            return this.store.restaurant_id = id;
+        setRestaurant(item) {
+            store.restaurant_slug = item.slug;
+            store.restaurant_id = item.id;
+
         },
         toggleType(typeId) {
             if (this.selectedTypes.includes(typeId)) {
@@ -114,8 +116,8 @@ export default {
             <div class="row row-cols-3">
                 <!-- Itera su ciascun tipo nell'array types -->
                 <div class="col" v-for="item in filteredRestaurants">
-                    <router-link class="restaurant-card card rounded" role="button" @click="setRestaurant(item.id)"
-                        :key="item.id" :to="{ name: RestaurantArea, path: '/restaurants/' + item.id }">
+                    <router-link class="restaurant-card card rounded" role="button" @click="setRestaurant(item)"
+                        :key="item.id" :to="{ name: RestaurantArea, path: '/restaurants/' + item.slug }">
                         <img v-if="item.image" :src="item.image" class="card-img-top" :alt="item.name">
                         <div class="card-body">
                             <div class="card-text text-center restaurant_name mb-3">{{ item.name }}</div>

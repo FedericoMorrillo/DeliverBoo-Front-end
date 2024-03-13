@@ -176,7 +176,7 @@ export default {
             </span>
         </h2>
 
-        <router-link :to="{ name: RestaurantArea, path: '/restaurants/' + store.restaurant_id }"
+        <router-link :to="{ name: RestaurantArea, path: '/restaurants/' + store.restaurant_slug }"
             class="btn btn-secondary" type="button">
             <i class="fa-solid fa-right-to-bracket fa-rotate-180 fs-3"></i>
         </router-link>
