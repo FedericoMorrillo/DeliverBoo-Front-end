@@ -55,6 +55,19 @@ export default {
             this.total = store.cart.reduce((acc, item) => acc + (item.price * item.quantity || 0), 0);
             this.calculateCounter();
         },
+
+        clearCart() {
+            // Svuota completamente il carrello
+            store.cart = [];
+            this.saveCart();
+        },
+
+        saveCart() {
+            // Salva il carrello in localStorage
+            this.saveLocalStorage();
+            // Calcola il totale dei prodotti nel carrello
+            this.calculateTotal();
+        },
     },
     created() {
         this.getRestaurant();
@@ -105,7 +118,7 @@ export default {
                             Sei sicuro di voler tornare indietro e svuotare il carrello ?
                         </div>
                         <div class="modal-footer">
-                            <a @click="clearcart(), clearcounter()" class="btn btn-danger" href="/">
+                            <a @click="clearCart" class="btn btn-danger" href="/">
                                 Svuota e torna indietro
                             </a>
                         </div>
