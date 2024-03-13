@@ -79,8 +79,7 @@ export default {
         </h2>
         <!--Tipologie-->
         <div>
-            
-            <h4 class="lengtharray mt-4 my-5">
+            <h4 class="lengtharray mt-4 my-5 text-center">
                 <span class=" text-org">
                     Attualmente sono disponibili {{ types.length }} Tipologie di Ristoranti
                 </span>
@@ -89,15 +88,15 @@ export default {
 
         <div class="row row-cols-4 g-4">
             <!-- Itera su ciascun tipo nell'array types -->
-            <div class="col" v-for="item in types">
+            <div class="col type-card-all" v-for="item in types">
                 <div class="type-card rounded hoverimg" :key="item.id" @click="toggleType(item.id)"
                     :class="{ 'bg-orng': selectedTypes.includes(item.id) }">
                     <div class="clickable card-body">
                         <img :src="item.image" class="card-img-top" :alt="item.name">
-                        <div class="form-check text-center py-2">
+                        <div class="form-check px-1 py-2 text-center">
                             <input class="visually-hidden form-check-input" type="checkbox" :value="item.id"
                                 :id="'type-checkbox-' + item.id" v-model="selectedTypes" @change="filterRestaurants">
-                            <label class="form-check-label pe-5" :for="'type-checkbox-' + item.id">
+                            <label class="form-check-label " :for="'type-checkbox-' + item.id">
                                 {{ item.name }}
                             </label>
                         </div>
@@ -116,23 +115,22 @@ export default {
 
             <div class="row row-cols-3">
                 <!-- Itera su ciascun tipo nell'array types -->
-                <div class="col" v-for="item in filteredRestaurants">
-                    <router-link class="restaurant-card card rounded h-100" role="button" @click="setRestaurant(item)"
-                        :key="item.id" :to="{ name: RestaurantArea, path: '/restaurants/' + item.slug }">
-                        <img v-if="item.image" :src="item.image" class="card-img-top" :alt="item.name">
-                        <div class="card-body">
-                            <div class="card-text text-center restaurant_name mb-3">{{ item.name }}</div>
-                            <div class="row row-cols-3 mx-0 g-2">
-                                <div class="col text-center" v-for="category in item.types">
-                                    <span class="badge ms_badge" :key="category.id"
-                                        :class="{ 'bg-success': selectedTypes.includes(category.id), 'bg-secondary': !selectedTypes.includes(category.id) }">
-                                        {{ category.name }}
-                                    </span>
-                                </div>
-                            </div>
+
+                <router-link class="col restaurant-card card rounded h-100" role="button" @click="setRestaurant(item)"
+                    v-for="item in filteredRestaurants" :key="item.id"
+                    :to="{ name: RestaurantArea, path: '/restaurants/' + item.slug }">
+                    <img v-if="item.image" :src="item.image" class="card-img-top" :alt="item.name">
+                    <div class="card-body">
+                        <div class="card-text text-center restaurant_name mb-3">{{ item.name }}</div>
+                        <div class="row row-cols-3 mx-0 g-2">
+                            <span class="badge ms_badge col text-center" :key="category.id"
+                                v-for="category in item.types"
+                                :class="{ 'bg-success': selectedTypes.includes(category.id), 'bg-secondary': !selectedTypes.includes(category.id) }">
+                                {{ category.name }}
+                            </span>
                         </div>
-                    </router-link>
-                </div>
+                    </div>
+                </router-link>
             </div>
         </div>
         <!--/Ristoranti-->
@@ -156,8 +154,14 @@ h4 {
     font-size: 2rem;
 }
 
+.badge {
+    width: calc(100% / 2 - 10px);
+    margin: 5px 5px;
+    padding: 5px 10px;
+}
+
 .ms_badge {
-    font-size: 1.125rem;
+    font-size: 14px;
 }
 
 .hoverimg:hover {
@@ -178,6 +182,83 @@ h4 {
 
 .bg-orng {
     background-color: #FFA500;
+}
+
+@media screen and (max-width:1400px) {
+    h2 {
+        font-size: 50px;
+    }
+}
+
+@media screen and (max-width:1200px) {
+    .type-card {
+        .form-check-label {
+            font-size: 15px;
+        }
+    }
+
+    h4 {
+        text-align: center;
+    }
+
+    .ms_badge {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width:992px) {
+    h2 {
+        font-size: 38px;
+    }
+
+    h4 {
+        font-size: 26px;
+    }
+
+    .type-card-all {
+        width: calc(100% / 4 - 20px);
+
+
+    }
+
+    .type-card {
+        .form-check-label {
+            font-size: 14px;
+        }
+    }
+
+    .restaurant-card {
+        width: calc(100% / 3 - 20px);
+    }
+}
+
+@media screen and (max-width:768px) {
+    h2 {
+        font-size: 28px
+    }
+
+    h4 {
+        font-size: 18px;
+    }
+
+    .type-card-all {
+        width: calc(100% / 4 - 20px);
+
+
+    }
+
+    .restaurant-card {
+        width: calc(100% / 2 - 20px);
+    }
+
+}
+
+@media screen and (max-width:576px) {
+    .restaurant-card {
+        width: calc(100% / 1 - 150px);
+        margin: 20px auto;
+    }
+
 }
 </style>
 
