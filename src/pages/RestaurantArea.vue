@@ -8,31 +8,28 @@ export default {
     data() {
         return {
             restaurant: [],
-            cart: JSON.parse(localStorage.getItem('cart')) || [],
             store,
             total: 0, // Inizializza il totale dei prodotti nel carrello
         }
     },
     methods: {
-        clearcart() {
-            localStorage.removeItem('cart');
-            this.cart = [];
+        saveLocalStorage() {
+            localStorage.setItem('cart', JSON.stringify(store.cart));
         },
-
-        clearcounter() {
-            localStorage.removeItem('counterr');
-            store.counter = [];
+        calculateCounter() {
+            let counter = store.cart.reduce((total, item) => total + item.quantity, 0);
+            localStorage.setItem('counter', JSON.stringify(counter));
+            store.counter = JSON.parse(localStorage.getItem("counter")) || 0;
         },
         addToCart(product) {
-            const existingProduct = this.cart.find(item => item.id === product.id);
+            const existingProduct = store.cart.find(item => item.id === product.id);
 
             if (existingProduct) {
                 existingProduct.quantity += product.quantity;
             } else {
-                this.cart.push({ ...product, quantity: product.quantity });
+                store.cart.push({ ...product, quantity: product.quantity });
             }
-            localStorage.setItem('cart', JSON.stringify(this.cart));
-            store.counter += product.quantity; localStorage.setItem('counter', JSON.stringify(store.counter));
+            this.saveLocalStorage();
             this.calculateTotal();
         },
 
@@ -55,13 +52,14 @@ export default {
         },
         calculateTotal() {
             // Calcola il totale dei prodotti nel carrello
-            this.total = this.cart.reduce((acc, item) => acc + (item.price * item.quantity || 0), 0);
+            this.total = store.cart.reduce((acc, item) => acc + (item.price * item.quantity || 0), 0);
+            this.calculateCounter();
         },
     },
     created() {
         this.getRestaurant();
-        store.counter = JSON.parse(localStorage.getItem('counterr')) || 0;
         this.calculateTotal();
+        console.log(localStorage.getItem('counter'))
     }
 }
 </script>
@@ -86,7 +84,7 @@ export default {
         <div class="d-flex align-items-center">
             <!-- Button trigger modal -->
             <div>
-                <button class="btn btn-secondary" v-if="this.cart.length > 0" data-bs-toggle="modal"
+                <button class="btn btn-secondary" v-if="store.cart.length > 0" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">
                     <i class="fa-solid fa-right-to-bracket fa-rotate-180 fs-2"></i>
                 </button>
@@ -132,7 +130,7 @@ export default {
                     </button>
                     <div class="dropdown-menu p-4 cart-preview">
                         <ul class="p-0">
-                            <li v-for="item in cart" class="border-bottom py-2 d-flex gap-2">
+                            <li v-for="item in store.cart" class="border-bottom py-2 d-flex gap-2">
                                 <img :src="item.image" :alt="item.name" class="cart-thumb">
                                 <div>
                                     <h5>{{ item.name }}</h5>

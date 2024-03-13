@@ -3,5 +3,6 @@ export const store = reactive({
   type: "",
   restaurant_slug: "",
   restaurant_id: "",
-  counter: JSON.parse(localStorage.getItem("counterr")) || [],
+  cart: JSON.parse(localStorage.getItem('cart')) || [],
+  counter: JSON.parse(localStorage.getItem("counter")) || 0,
 });

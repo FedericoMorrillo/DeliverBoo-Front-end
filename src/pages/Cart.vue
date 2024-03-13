@@ -12,7 +12,6 @@ export default {
             store,
             showForm: false, // Inizializza la visibilità del modulo a falso
             // dishes: [],
-            cart: [], // Inizializza il carrello come un array vuoto
             selectedProductIndex: null, // Indice del prodotto selezionato dall'utente
             quantity: 1, // Inizializza la quantità predefinita del prodotto
             total: 0, // Inizializza il totale dei prodotti nel carrello
@@ -26,35 +25,39 @@ export default {
         };
     },
     methods: {
+        saveLocalStorage() {
+            localStorage.setItem('cart', JSON.stringify(store.cart));
+        },
         showUserDataForm() {
-            if (this.cart.length > 0) {
+            if (store.cart.length > 0) {
                 this.showForm = true; // Mostra il modulo dei dati dell'utente quando il pulsante "Checkout" viene premuto
             }
         },
+        calculateCounter() {
+            let counter = store.cart.reduce((total, item) => total + item.quantity, 0);
+            localStorage.setItem('counter', JSON.stringify(counter));
+            store.counter = JSON.parse(localStorage.getItem("counter")) || 0;
+        },
         saveCart() {
             // Salva il carrello in localStorage
-            localStorage.setItem('cart', JSON.stringify(this.cart));
+            this.saveLocalStorage();
             // Calcola il totale dei prodotti nel carrello
             this.calculateTotal();
         },
         removeFromCart(index) {
             // Rimuove un elemento dal carrello
-            this.cart.splice(index, 1);
-            this.saveCart(); // Salva il carrello in localStorage
-        },
-        updateQuantity() {
-            // Aggiorna la quantità di un elemento nel carrello
+            store.cart.splice(index, 1);
             this.saveCart(); // Salva il carrello in localStorage
         },
         clearCart() {
             // Svuota completamente il carrello
-            this.cart = [];
-            localStorage.removeItem('cart'); // Rimuovi il carrello da localStorage
-            this.calculateTotal(); // Aggiorna il totale
+            store.cart = [];
+            this.saveCart();
         },
         calculateTotal() {
-            // Calcola il totale dei prodotti nel carrello
-            this.total = this.cart.reduce((acc, item) => acc + (item.price * item.quantity || 0), 0);
+            // Calcola il prezzo totale dei prodotti nel carrello
+            this.total = store.cart.reduce((acc, item) => acc + (item.price * item.quantity || 0), 0);
+            this.calculateCounter();
         },
         validateUserData() {
             return (
@@ -77,9 +80,9 @@ export default {
         },
         confirmOrder() {
             // Assicurati che il carrello non sia vuoto e che tutti i campi utente siano compilati
-            if (this.cart.length > 0 && this.validateUserData()) {
+            if (store.cart.length > 0 && this.validateUserData()) {
                 const orderData = {
-                    cart: this.cart,
+                    cart: store.cart,
                     total: this.total,
                     userData: this.userData
                 };
@@ -106,14 +109,12 @@ export default {
 
         plusQuantity(item) {
             item.quantity++
-            this.calculateTotal();
-            return item
+            this.saveCart();
         },
         minusQuantity(item) {
             if (item.quantity > 1) {
                 item.quantity--
-                this.calculateTotal();
-                return item
+                this.saveCart();
             }
         },
     },
@@ -123,7 +124,7 @@ export default {
         // Carica il carrello dal localStorage all'avvio dell'applicazione
         const savedCart = localStorage.getItem('cart');
         if (savedCart) {
-            this.cart = JSON.parse(savedCart);
+            store.cart = JSON.parse(savedCart);
             this.calculateTotal(); // Calcola il totale dei prodotti nel carrello
         };
     }
@@ -146,7 +147,7 @@ export default {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item, index) in cart" :key="index">
+                <tr v-for="(item, index) in store.cart" :key="index">
                     <td><img v-show="item.image" :src="item.image" :alt="item.name"></td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.price }} &euro;</td>
