@@ -77,7 +77,7 @@ export default {
         </h2>
         <!--Tipologie-->
         <div>
-            <h4 class="lengtharray mt-4 my-3">
+            <h4 class="lengtharray mt-4 my-5">
                 <span class=" text-org">
                     Attualmente sono disponibili {{ types.length }} Tipologie di Ristoranti
                 </span>
