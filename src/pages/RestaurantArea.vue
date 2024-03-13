@@ -141,24 +141,23 @@ export default {
                             <div class="col col-5">
                                 <div class="card-text"><strong>Nome: </strong>{{ item.name }}</div>
                             </div>
-                            <div class="col col-3">
-                                <span class="fs.secondary me-2 mt-3 mb-2"><strong>Prezzo:</strong></span>{{ item.price
-                                }}€
+                            <div class="col col-4">
+                                <strong>Prezzo: </strong>
+                                <span>{{ item.price }}€</span>
                             </div>
                         </div>
                     </div>
-                    <div class="row align-items-center text-center mt-3">
+                    <div class="row align-items-center text-center mt-4">
                         <div class="col col-3 text-end fs-4"><strong>Quantità:</strong></div>
                         <div class="col col-4 text-start">
-                            <button class="btn btn-secondary" @click="minusQuantity(item)">
+                            <button class="btn btn-secondary" @click="minusQuantity(item)"
+                                v-bind:disabled="item.quantity === 1">
                                 <i class=" fa-solid fa-minus"></i>
                             </button>
                             <strong class="mx-3">{{ item.quantity }}</strong>
                             <button class="btn btn-secondary" @click="plusQuantity(item)">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
-                            <!-- <input type="number" min="1" max="50" v-model="item.quantity"
-                                class="form-control mt-3 mb-3"> -->
                         </div>
                         <div class="col col-5">
                             <button @click="addToCart(item)" class="btn btn-org fs-5">

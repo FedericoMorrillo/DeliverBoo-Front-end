@@ -103,6 +103,19 @@ export default {
                 console.warn('Impossibile confermare un ordine vuoto o con dati utente incompleti.');
             }
         },
+
+        plusQuantity(item) {
+            item.quantity++
+            this.calculateTotal();
+            return item
+        },
+        minusQuantity(item) {
+            if (item.quantity > 1) {
+                item.quantity--
+                this.calculateTotal();
+                return item
+            }
+        },
     },
     created() {
         // this.getDishes();
@@ -119,15 +132,17 @@ export default {
 
 <template>
     <div class="cart container">
-        <h2>Carrello</h2>
-        <table class="table">
+        <h2 class="mb-3">
+            <span class=" text-org">Carrello</span>
+        </h2>
+        <table class="table fs-4">
             <thead>
                 <tr>
                     <th scope="col">Img</th>
                     <th scope="col">Piatto</th>
                     <th scope="col">Prezzo</th>
-                    <th scope="col">Q.ta</th>
-                    <th scope="col"></th>
+                    <th scope="col">Quantità</th>
+                    <th scope="col" class="text-center">Elimina</th>
                 </tr>
             </thead>
             <tbody>
@@ -135,61 +150,73 @@ export default {
                     <td><img v-show="item.image" :src="item.image" :alt="item.name"></td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.price }} &euro;</td>
-                    <td><input type="number" v-model.number="item.quantity" min="1" @change="updateQuantity(index)">
-                    </td>
                     <td>
+                        <button class="btn btn-secondary" @click="minusQuantity(item)"
+                            v-bind:disabled="item.quantity === 1">
+                            <i class=" fa-solid fa-minus"></i>
+                        </button>
+                        <strong class="mx-3">{{ item.quantity }}</strong>
+                        <button class="btn btn-secondary" @click="plusQuantity(item)">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </td>
+                    <td class="text-center">
                         <button class="btn btn-danger" @click="removeFromCart(index)">
                             <i class="fa-solid fa-trash"></i>
-                    </button>
-                </td>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
 
         <!-- Mostra il totale del carrello -->
-        <p>Totale: {{ total.toFixed(2) }} &euro;</p>
+        <h2 class="text-center">
+            <span class=" text-org">
+                Totale: {{ total.toFixed(2) }} &euro;
+            </span>
+        </h2>
 
         <router-link :to="{ name: RestaurantArea, path: '/restaurants/' + store.restaurant_id }"
             class="btn btn-secondary" type="button">
-            <i class="fa-solid fa-right-to-bracket fa-rotate-180"></i>
+            <i class="fa-solid fa-right-to-bracket fa-rotate-180 fs-3"></i>
         </router-link>
 
         <!-- Pulsante per svuotare completamente il carrello -->
-        <button class="btn btn-danger mx-2" @click="clearCart">Svuota Carrello</button>
+        <button class="btn btn-danger mx-2 fs-4" @click="clearCart">Svuota Carrello</button>
         <!-- Bottone Checkout -->
-        <button class="btn btn-org" @click="showUserDataForm">Checkout</button>
+        <button class="btn btn-org fs-4" @click="showUserDataForm">Checkout</button>
 
-        <div class="row mt-3">
-            <div class="col col-4">
-                <!-- Dati utente -->
-                <form v-if="showForm" @submit.prevent="confirmOrder">
-                    <h2>Dati dell'utente</h2>
-                    <div class="user-data">
-                        <label for="name">Nome:</label>
-                        <input type="text" id="name" v-model="userData.name" required>
-                    </div>
-                    <div class="user-data">
-                        <label for="surname">Cognome:</label>
-                        <input type="text" id="surname" v-model="userData.surname" required>
-                    </div>
-                    <div class="user-data">
-                        <label for="phone">Telefono:</label>
-                        <input type="text" id="phone" v-model="userData.phone" required>
-                    </div>
-                    <div class="user-data">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" v-model="userData.email" required>
-                    </div>
-                    <div class="user-data">
-                        <label for="address">Indirizzo:</label>
-                        <input type="text" id="address" v-model="userData.address" required>
-                    </div>
-                    <!-- Pulsante per confermare ordine -->
-                    <!-- <button class="btn btn-org" type="submit">Conferma Ordine</button> -->
-                </form>
-            </div>
-            <div class="col col-8">
-                <CheckoutComponent v-if="showForm" :total="this.total" @confirmOrder="confirmOrder" />
+        <div class="card mt-3 p-4" v-show="showForm">
+            <div class="row">
+                <div class="col col-4">
+                    <!-- Dati utente -->
+                    <form @submit.prevent="confirmOrder">
+                        <h2>Dati dell'utente</h2>
+                        <div class="mb-1">
+                            <label for="name" class="form-label fs-5">Nome</label>
+                            <input type="text" id="name" v-model="userData.name" class="form-control">
+                        </div>
+                        <div class="mb-1">
+                            <label class="form-label fs-5" for="surname">Cognome:</label>
+                            <input type="text" id="surname" v-model="userData.surname" class="form-control">
+                        </div>
+                        <div class="mb-1">
+                            <label class="form-label fs-5" for="phone">Telefono:</label>
+                            <input type="text" id="phone" v-model="userData.phone" class="form-control">
+                        </div>
+                        <div class="mb-1">
+                            <label class="form-label fs-5" for="email">Email:</label>
+                            <input type="email" id="email" v-model="userData.email" class="form-control">
+                        </div>
+                        <div class="mb-1">
+                            <label class="form-label fs-5" for="address">Indirizzo:</label>
+                            <input type="text" id="address" v-model="userData.address" class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <div class="col col-8">
+                    <CheckoutComponent :total="this.total" @confirmOrder="confirmOrder" />
+                </div>
             </div>
         </div>
     </div>
@@ -200,17 +227,6 @@ export default {
 img {
     height: 25px;
     width: 25px;
-}
-
-form {
-    width: 250px;
-
-    .user-data {
-        margin: 10px 0;
-        display: flex;
-        justify-content: space-between;
-    }
-
 }
 
 .cart {
