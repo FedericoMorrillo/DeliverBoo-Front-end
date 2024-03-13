@@ -25,7 +25,7 @@ export default {
             </h1>
             <!--/title-->
 
-            <h5 class="text-light fw-light my-5">Il traffico per le anatre non è un problema!</h5>
+            <h5 class="text-light fw-light my-4">Il traffico per le anatre non è un problema!</h5>
 
             <!--btn jumbo-->
             <div>
@@ -85,6 +85,46 @@ export default {
 .description:hover {
     transform: scale(1.1);
     transition: 0.8s;
+}
+
+@media screen and (max-width:1400px) {
+    .jumbotron {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        background-position: center;
+
+        .card {
+            width: 600px;
+
+            h1 {
+                font-size: 60px;
+            }
+        }
+
+        .ms_card {
+            margin: 0;
+        }
+    }
+}
+
+@media screen and (max-width:800px) {
+    .jumbotron {
+        flex-direction: row;
+        justify-content: end;
+        background-position: center;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .jumbotron {
+        .card {
+            h1 {
+                font-size: 45px;
+            }
+        }
+
+    }
 }
 </style>
 <!--/CSS-->
