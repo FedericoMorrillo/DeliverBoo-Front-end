@@ -36,6 +36,7 @@ body {
 
 
 }
+
 body::before {
     content: "";
     position: absolute;
@@ -49,12 +50,12 @@ body::before {
     background-position: center;
     filter: blur(2px);
     z-index: -1;
-  }
-  
-  .content {
+}
+
+.content {
     background-color: rgba(252, 252, 252, 0.1);
     padding: 20px;
-  }
+}
 
 
 .blocknone {
@@ -164,7 +165,6 @@ p {
 }
 
 .restaurant-card {
-    width: calc(100% / 4 - 20px);
     margin: 0 10px 10px 10px;
     background-color: white;
     border: 2px solid #FFA500;
