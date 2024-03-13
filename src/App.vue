@@ -25,17 +25,19 @@ export default {
 </script>
 
 <template>
+  <LoginArea />
   <div id="giga-container" class="d-flex flex-column">
-    <LoginArea />
     <main>
       <router-view></router-view>
-      <FooterArea />
     </main>
+    <FooterArea />
   </div>
 </template>
 
 <style scoped>
 #giga-container {
-  min-height: 100vh;
+  margin-top: 80px;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
 }
 </style>
