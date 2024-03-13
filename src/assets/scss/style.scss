@@ -28,6 +28,14 @@ body {
     background-position: 100px 0, 100px 0, 0 0, 0 0;
     background-size: 100px 100px;
     background-repeat: repeat;
+
+    overflow: hidden;
+
+    main {
+        margin-top: 80px;
+        height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
 }
 
 .blocknone {
