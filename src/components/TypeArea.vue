@@ -191,6 +191,10 @@ h4 {
             font-size: 15px;
         }
     }
+
+    h4 {
+        text-align: center;
+    }
 }
 
 @media screen and (max-width:992px) {
