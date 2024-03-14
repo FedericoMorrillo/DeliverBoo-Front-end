@@ -26,7 +26,7 @@ export default {
                 <!--/logo-->
                 <ul class="d-flex align-items-center ps-3">
                     <li class="scale">
-                        <a class="hovernav" href="http://localhost:5174/">Home</a>
+                        <a class="hovernav" href="http://localhost:5173/">Home</a>
                     </li>
                 </ul>
             </div>
@@ -35,10 +35,10 @@ export default {
             <!--login-register-->
             <ul class="d-flex align-items-center">
                 <li class="pe-3 login scale">
-                    <a class="hovernav" href="http://127.0.0.1:8000/login">Login</a>
+                    <a class="hovernav" href="http://localhost:8000/login">Login</a>
                 </li>
                 <li class="pe-2 register scale">
-                    <a class="hovernav" href="http://127.0.0.1:8000/register">Registrati</a>
+                    <a class="hovernav" href="http://localhost:8000/register">Registrati</a>
                 </li>
             </ul>
             <!--/login-register-->

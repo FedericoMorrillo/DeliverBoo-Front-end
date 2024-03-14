@@ -127,9 +127,6 @@ export default {
             </div>
             <!-- Modal -->
 
-            <div>
-                <strong class="px-3 py-2 rounded btn-org mx-3 fs-3">Menù</strong>
-            </div>
             <div class="ms-auto">
                 <!-- Anteprima carrello -->
                 <div class="dropdown">
@@ -175,11 +172,25 @@ export default {
         <!-- Loader -->
 
         <!-- Menu -->
+        <div class="d-flex flexxato">
+            <div class="imgrestaurantbg col-12 col-md-10">
+                <!-- <img  class="img-fluid" :src="restaurant.image" :alt="restaurant.name"> -->
+                <h2>Benvenuti  in <span class="namerestaurant">{{ restaurant.name }}</span></h2>
+                <p>L'app quack delivery ti consente di ordinare cibo o prodotti direttamente dal tuo telefono e riceverli comodamente a casa tua. Con un'ampia selezione di ristoranti e negozi disponibili, puoi scegliere tra una vasta gamma di piatti e prodotti per soddisfare i tuoi gusti e bisogni. Grazie alla tracciabilità degli ordini in tempo reale, puoi monitorare il progresso della consegna e ricevere notifiche sullo stato del tuo ordine. Con un'interfaccia intuitiva e facile da usare, l'app delivery rende il processo di ordinare e ricevere cibo o prodotti più semplice e conveniente che mai.</p>
+            </div>
+            
+            <div class="imgrestaurantbg col col-md-2">
+                <img  class="img-fluid" :src="restaurant.image" :alt="restaurant.name">
+            </div>
+        </div>
+        <div class="menu">
+                <strong class="px-3 py-2 rounded btn-org mx-3 fs-3">Menù</strong>
+        </div>
         <div class="row g-3 my-3">
             <div class="col col-12" v-for="item in restaurant.dishes">
                 <div class="card mb-3">
                     <div class="row g-0">
-                        <div class="col-md-4" v-if="item.image">
+                        <div class="col-md-4 imagrestaurants" v-if="item.image">
                             <img v-if="item.image" :src="item.image" class="img-fluid rounded-start"
                                 :alt="item.name + ' img'">
                         </div>
@@ -226,6 +237,37 @@ export default {
 <!--CSS-->
 
 <style scoped lang="scss">
+.imgrestaurantbg img{
+    width: 100%;
+    border-radius: 50%;
+    padding-right: 20px;
+    
+}
+.namerestaurant{
+    animation: changecolor 5s infinite ease-in-out;
+}
+.menu{
+    margin-top: 20px;
+}
+
+.dropdown{
+    position: fixed;
+}
+.flexxato{
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+
+    h2{
+    }
+    p{
+        padding-right: 50px;
+    }
+}
+.imagrestaurants img{
+    width: 50%;
+}
+
 .stylesection {
     margin-top: 100px;
 }
@@ -242,6 +284,7 @@ export default {
 .imgloading img {
     width: 100px;
     animation: logoduck 1s infinite ease-in-out;
+    transition: 0.5s;
     border-radius: 20px;
     margin-right: 20px;
 }
@@ -252,6 +295,20 @@ export default {
 
 .imgloading {
     text-align: center;
+}
+@keyframes changecolor {
+    0%{
+        color: white;
+    }
+
+    50%{
+        color: yellowgreen;
+    }
+
+    100%{
+        color: olivedrab;
+    }
+    
 }
 
 @keyframes logoduck {
