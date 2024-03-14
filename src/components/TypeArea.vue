@@ -88,21 +88,25 @@ export default {
 
         <div class="row row-cols-4 g-4">
             <!-- Itera su ciascun tipo nell'array types -->
-            <div class="col type-card-all" v-for="item in types">
-                <div class="type-card rounded hoverimg" :key="item.id" @click="toggleType(item.id)"
-                    :class="{ 'bg-orng': selectedTypes.includes(item.id) }">
-                    <div class="clickable card-body">
-                        <img :src="item.image" class="card-img-top" :alt="item.name">
-                        <div class="form-check px-1 py-2 text-center">
-                            <input class="visually-hidden form-check-input" type="checkbox" :value="item.id"
-                                :id="'type-checkbox-' + item.id" v-model="selectedTypes" @change="filterRestaurants">
-                            <label class="form-check-label " :for="'type-checkbox-' + item.id">
-                                {{ item.name }}
-                            </label>
+            <div class="col-lg-2 col-md-3 col-sm-4 col-6" v-for="item in types">
+                <div class=" type-card-all">
+                    <div class="type-card rounded hoverimg" :key="item.id" @click="toggleType(item.id)"
+                        :class="{ 'bg-orng': selectedTypes.includes(item.id) }">
+                        <div class="clickable card-body">
+                            <img :src="item.image" class="card-img-top" :alt="item.name">
+                            <div class="form-check px-1 py-2 text-center">
+                                <input class="visually-hidden form-check-input" type="checkbox" :value="item.id"
+                                    :id="'type-checkbox-' + item.id" v-model="selectedTypes"
+                                    @change="filterRestaurants">
+                                <label class="form-check-label " :for="'type-checkbox-' + item.id">
+                                    {{ item.name }}
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <!--Ristoranti-->
@@ -185,6 +189,10 @@ h4 {
     background-color: #FFA500;
 }
 
+.row-cols-4 {
+    justify-content: center;
+}
+
 @media screen and (max-width:1400px) {
     h2 {
         font-size: 50px;
@@ -192,11 +200,6 @@ h4 {
 }
 
 @media screen and (max-width:1200px) {
-    .type-card {
-        .form-check-label {
-            font-size: 15px;
-        }
-    }
 
     h4 {
         text-align: center;
@@ -216,11 +219,6 @@ h4 {
         font-size: 26px;
     }
 
-    .type-card {
-        .form-check-label {
-            font-size: 14px;
-        }
-    }
 }
 
 @media screen and (max-width:768px) {
@@ -230,12 +228,6 @@ h4 {
 
     h4 {
         font-size: 18px;
-    }
-
-    .type-card-all {
-        width: calc(100% / 4 - 20px);
-
-
     }
 }
 
