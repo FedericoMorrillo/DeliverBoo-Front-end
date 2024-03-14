@@ -1,7 +1,5 @@
+@use './variables.scss' as *;
 @import 'bootstrap/dist/css/bootstrap.min.css';
-@import 'footer';
-@import 'utils';
-@import 'header';
 
 //reset
 * {
@@ -13,172 +11,33 @@
 }
 
 a {
-    color: black;
+    color: inherit;
+    text-decoration: none;
 }
 
 //reset
-
 body {
-    // background-color: rgba(251, 255, 254, .75);
-    // opacity: 1;
-    // background-image: linear-gradient(135deg, rgba(213, 50, 52, .75) 25%, transparent 25%), linear-gradient(225deg, rgba(213, 50, 52, .75) 25%, transparent 25%), linear-gradient(45deg, rgba(213, 50, 52, .75) 25%, transparent 25%), linear-gradient(315deg, rgba(213, 50, 52, .75) 25%, rgba(251, 255, 254, .75) 25%);
-    // background-position: 100px 0, 100px 0, 0 0, 0 0;
-    // background-size: 100px 100px;
-    // background-repeat: repeat;
-
-    // overflow: hidden;
-    // background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    // background-image: url();
-    position: relative;
     overflow: hidden;
-
-
+    background-color: $color6;
 }
 
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    // background-image: url(/public/img/Bg-pattern.JPG);
-    // background-repeat: repeat;
-    // background-size: 300px;
-    background: rgb(255, 165, 0);
-    background: radial-gradient(circle, rgba(255, 165, 0, 1) 0%, rgba(103, 187, 99, 1) 75%);
-    background-position: center;
-    filter: blur(5px);
-    z-index: -1;
+//colori layout
+.text-org {
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    color: white;
+    text-shadow: 3px 3px 3px rgba(205, 57, 51, 1);
+    // -webkit-text-stroke-width: 2px;
+    // -webkit-text-stroke-color: rgba(205, 57, 51, 1);
+    // background-color: rgba(0, 0, 0, .5);
+    padding: .5rem;
+    border-radius: .9375rem;
 }
 
-.content {
-    background-color: rgba(252, 252, 252, 0);
-    padding: 20px;
+.btn-org {
+    color: $color6;
+    background-color: $color1;
+    border: none;
 }
-
-
-.blocknone {
-    display: none;
-}
-
-.on {
-    display: block;
-}
-
-//font paragrafi
-p {
-    font-size: 1.125rem;
-}
-
-//Home
-
-//jumbotron
-.jumbotron {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-image: url('/img/jumbo.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-
-    .ms_card {
-        background-color: rgba(0, 0, 0, 0.356);
-        padding: .625rem;
-        color: white;
-        border-radius: .9375rem;
-        margin-top: 75px;
-        margin-left: 750px;
-
-        h1 {
-            font-size: 4rem;
-            color: rgba(0, 0, 0, 0.767);
-        }
-
-        h5 {
-            font-size: 2.25rem;
-        }
-
-        a {
-            font-size: 1.5rem;
-        }
-    }
-
-}
-
-//jumbotron
-
-//card pagina home
-.home-card {
-    width: calc(100% / 2 - 1.25rem);
-    background-color: white;
-    border: .125rem solid #FFA500;
-
-    p {
-        margin: 0;
-    }
-}
-
-.order {
-    border: .125rem solid #FFA500;
-}
-
-.color {
-    color: white
-}
-
-.color2 {
-    color: black;
-}
-
-.bgcolor {
-    background-color: black;
-}
-
-//Home
-
-//TypeArea
-
-.type-card {
-    background-color: white;
-    border: 2px solid #FFA500;
-    box-shadow: rgba(0, 0, 0, 0.356) .625rem .625rem;
-    object-fit: cover;
-
-    .form-check {
-        font-size: 22px;
-    }
-}
-
-//TypeArea
-//RestaurantArea
-.in-b {
-    h2 {
-        display: inline-block;
-        border-radius: .9375rem;
-    }
-}
-
-.restaurant-card {
-    margin: 0 10px 10px 10px;
-    background-color: white;
-    border: 2px solid #FFA500;
-    box-shadow: rgba(0, 0, 0, 0.356) .625rem .625rem;
-}
-
-//RestaurantArea
-
-// cart preview
-.cart-thumb {
-    width: 4.375rem;
-}
-
-.cart-preview {
-    width: 18.75rem;
-}
-
-// cart preview

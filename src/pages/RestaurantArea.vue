@@ -86,7 +86,7 @@ export default {
 <!--HTML-->
 
 <template>
-    <section class="container in-b stylesection">
+    <section class="container stylesection">
         <!-- Intestazione -->
         <div class="d-flex align-items-center">
             <!-- Button trigger modal -->
@@ -237,37 +237,17 @@ export default {
 <!--CSS-->
 
 <style scoped lang="scss">
-.imgrestaurantbg img{
-    width: 100%;
-    border-radius: 50%;
-    padding-right: 20px;
-    
-}
-.namerestaurant{
-    animation: changecolor 5s infinite ease-in-out;
-}
-.menu{
-    margin-top: 20px;
-}
 
-.dropdown{
-    position: fixed;
-}
-.flexxato{
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
+.type-card {
+    background-color: white;
+    border: 2px solid #FFA500;
+    box-shadow: rgba(0, 0, 0, 0.356) .625rem .625rem;
+    object-fit: cover;
 
-    h2{
-    }
-    p{
-        padding-right: 50px;
+    .form-check {
+        font-size: 22px;
     }
 }
-.imagrestaurants img{
-    width: 50%;
-}
-
 .stylesection {
     margin-top: 100px;
 }
@@ -296,6 +276,7 @@ export default {
 .imgloading {
     text-align: center;
 }
+<<<<<<< HEAD
 @keyframes changecolor {
     0%{
         color: white;
@@ -309,8 +290,18 @@ export default {
         color: olivedrab;
     }
     
+=======
+// cart preview
+.cart-thumb {
+    width: 4.375rem;
+>>>>>>> feat/fix_style
 }
 
+.cart-preview {
+    width: 18.75rem;
+}
+
+// cart preview
 @keyframes logoduck {
     0% {
         transform: rotate(360deg);
