@@ -115,7 +115,7 @@ export default {
 
             <div class="row row-cols-3">
                 <!-- Itera su ciascun tipo nell'array types -->
-                <div class="col-sm-6 col-4 col-lg-3 my-3 gap-2" v-for="item in filteredRestaurants">
+                <div class="col-10 col-sm-6 col-md-4 col-lg-3 my-3 gap-2" v-for="item in filteredRestaurants">
                     <router-link class="restaurant-card card rounded h-100" role="button" @click="setRestaurant(item)"
                         :key="item.id" :to="{ name: RestaurantArea, path: '/restaurants/' + item.slug }">
                         <img v-if="item.image" :src="item.image" class="card-img-top px-4" :alt="item.name">
@@ -237,8 +237,12 @@ h4 {
 
 
     }
+}
 
-
+@media screen and (max-width:576px) {
+    .row {
+        justify-content: center;
+    }
 }
 </style>
 
