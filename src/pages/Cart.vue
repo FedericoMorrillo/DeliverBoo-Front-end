@@ -139,7 +139,6 @@ export default {
         <table class="table fs-4">
             <thead>
                 <tr>
-                    <th scope="col">Img</th>
                     <th scope="col">Piatto</th>
                     <th scope="col">Prezzo</th>
                     <th scope="col">Quantità</th>
@@ -148,7 +147,6 @@ export default {
             </thead>
             <tbody>
                 <tr v-for="(item, index) in store.cart" :key="index">
-                    <td><img v-show="item.image" :src="item.image" :alt="item.name"></td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.price }} &euro;</td>
                     <td>
@@ -187,9 +185,9 @@ export default {
         <!-- Bottone Checkout -->
         <button class="btn btn-org fs-4" @click="showUserDataForm">Checkout</button>
 
-        <div class="card mt-3 p-4" v-show="showForm">
+        <div class="card mt-3 p-4 mb-4" v-show="showForm">
             <div class="row">
-                <div class="col col-4">
+                <div class="col col-12 col-md-4">
                     <!-- Dati utente -->
                     <form @submit.prevent="confirmOrder">
                         <h2>Dati dell'utente</h2>
@@ -215,7 +213,7 @@ export default {
                         </div>
                     </form>
                 </div>
-                <div class="col col-8">
+                <div class="col col-12 col-md-8">
                     <CheckoutComponent :total="this.total" @confirmOrder="confirmOrder" />
                 </div>
             </div>
