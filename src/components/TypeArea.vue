@@ -122,9 +122,11 @@ export default {
                 <div class="col-10 col-sm-6 col-md-4 col-lg-3 my-3 gap-2" v-for="item in filteredRestaurants">
                     <router-link class="restaurant-card card rounded h-100" role="button" @click="setRestaurant(item)"
                         :key="item.id" :to="{ name: RestaurantArea, path: '/restaurants/' + item.slug }">
-                        <img v-if="item.image" :src="item.image" class="card-img-top px-3 py-3" :alt="item.name">
-                        <div class="card-body">
-                            <div class="card-text text-center restaurant_name mb-3">{{ item.name }}</div>
+                        <div class="cardimg">
+                           <img v-if="item.image" :src="item.image" class="card-img-top px-3 py-3 card_img" :alt="item.name">
+
+                            <div class="card-body">
+                            <div class="card-text text-center restaurant_name mb-3 card_title">{{ item.name }}</div>
                             <div class="row row-cols-3 mx-0 g-2">
                                 <span class="badge ms_badge col text-center" :key="category.id"
                                     v-for="category in item.types"
@@ -133,6 +135,7 @@ export default {
                                 </span>
                             </div>
                         </div>
+                    </div>
                     </router-link>
                 </div>
 
@@ -143,6 +146,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
+
 .fade-in {
   opacity: 0;
   transition: opacity 1s ease-in-out;
