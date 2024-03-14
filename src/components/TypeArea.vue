@@ -73,20 +73,20 @@ export default {
 <template>
     <div id="type-area" class="container content">
         <h2 class="text-center mb-5">
-            <span class=" text-org">
+            <span class=" text-org fade-in">
                 Scegli cosa vuoi e noi te lo portiamo!
             </span>
         </h2>
         <!--Tipologie-->
         <div>
             <h4 class="lengtharray mt-4 my-5 text-center">
-                <span class=" text-org">
+                <span class=" text-org fade-inn">
                     Attualmente sono disponibili {{ types.length }} Tipologie di Ristoranti
                 </span>
             </h4>
         </div>
 
-        <div class="row row-cols-4 g-4">
+        <div class="row row-cols-4 g-4 fade-inn">
             <!-- Itera su ciascun tipo nell'array types -->
             <div class="col-lg-2 col-md-3 col-sm-4 col-6" v-for="item in types">
                 <div class=" type-card-all">
@@ -117,7 +117,7 @@ export default {
                 </span>
             </h4>
 
-            <div class="row row-cols-3">
+            <div class="row row-cols-3 fade-in">
                 <!-- Itera su ciascun tipo nell'array types -->
                 <div class="col-10 col-sm-6 col-md-4 col-lg-3 my-3 gap-2" v-for="item in filteredRestaurants">
                     <router-link class="restaurant-card card rounded h-100" role="button" @click="setRestaurant(item)"
@@ -143,6 +143,17 @@ export default {
 </template>
 
 <style scoped lang="scss">
+.fade-in {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+.fade-inn {
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+.visible {
+  opacity: 1;
+}
 #type-area {
     padding: 75px 0;
 }
