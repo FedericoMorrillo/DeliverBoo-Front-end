@@ -22,15 +22,25 @@ export default {
             store.counter = JSON.parse(localStorage.getItem("counter")) || 0;
         },
         addToCart(product) {
-            const existingProduct = store.cart.find(item => item.id === product.id);
+            if (this.checkRestaurantId(product)) {
+                const existingProduct = store.cart.find(item => item.id === product.id);
 
-            if (existingProduct) {
-                existingProduct.quantity += product.quantity;
-            } else {
-                store.cart.push({ ...product, quantity: product.quantity });
+                if (existingProduct) {
+                    existingProduct.quantity += product.quantity;
+                } else {
+                    store.cart.push({ ...product, quantity: product.quantity });
+                }
+                this.saveLocalStorage();
+                this.calculateTotal();
             }
-            this.saveLocalStorage();
-            this.calculateTotal();
+        },
+
+        checkRestaurantId(product) {
+            if (store.cart.length > 0 && store.cart.find(item => item.restaurant_id !== product.restaurant_id)) {
+                return false;
+            } else {
+                return true;
+            }
         },
 
         getRestaurant() {
@@ -40,15 +50,6 @@ export default {
                     item.quantity = 1;
                 });
             });
-        },
-
-        plusQuantity(item) {
-            return item.quantity++
-        },
-        minusQuantity(item) {
-            if (item.quantity > 1) {
-                return item.quantity--
-            }
         },
         calculateTotal() {
             // Calcola il totale dei prodotti nel carrello
@@ -68,11 +69,14 @@ export default {
             // Calcola il totale dei prodotti nel carrello
             this.calculateTotal();
         },
+
+        closeModal() {
+            document.getElementById('closeModal').click();
+        },
     },
     created() {
         this.getRestaurant();
         this.calculateTotal();
-        console.log(localStorage.getItem('counter'))
     }
 }
 </script>
@@ -83,16 +87,6 @@ export default {
 
 <template>
     <section class="container in-b stylesection">
-        <!-- Loader -->
-        <div v-if="restaurant.length === 0">
-            <div class="imgloading">
-                <img src="/img/logo.jpeg" alt="Logo"> <span>
-                    <h2>Loading ...</h2>
-                </span>
-            </div>
-        </div>
-        <!-- Loader -->
-
         <!-- Intestazione -->
         <div class="d-flex align-items-center">
             <!-- Button trigger modal -->
@@ -111,16 +105,22 @@ export default {
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Torna indietro</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Attenzione!</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                id="closeModal"></button>
                         </div>
                         <div class="modal-body">
-                            Sei sicuro di voler tornare indietro e svuotare il carrello ?
+                            Puoi ordinare prodotti da un solo ristorante alla volta.
+                            Per continuare devi prima svuotare il carrello o completare il tuo ordine!
                         </div>
                         <div class="modal-footer">
-                            <a @click="clearCart" class="btn btn-danger" href="/">
-                                Svuota e torna indietro
-                            </a>
+                            <button @click="clearCart" class="btn btn-danger" data-bs-dismiss="modal">
+                                Svuota il carrello
+                            </button>
+                            <router-link :to="{ name: Cart, path: '/cart' }" class="btn btn-primary" type="button"
+                                @click="closeModal">
+                                Completa il tuo ordine
+                            </router-link>
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,7 @@ export default {
                                 <img :src="item.image" :alt="item.name" class="cart-thumb">
                                 <div>
                                     <h5>{{ item.name }}</h5>
-                                    &euro;{{ item.price }} x {{ item.quantity }}
+                                    {{ item.price }} &euro; x {{ item.quantity }}
                                 </div>
                             </li>
                             <li class="py-2">
@@ -161,57 +161,61 @@ export default {
                 </div>
                 <!-- Anteprima carrello -->
             </div>
-            <!-- <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
-                    aria-labelledby="offcanvasWithBothOptionsLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                </div> -->
         </div>
         <!-- Intestazione -->
 
+        <!-- Loader -->
+        <div v-if="restaurant.length === 0" class="mt-5 pt-5">
+            <div class="imgloading">
+                <img src="/img/logo.jpeg" alt="Logo"> <span>
+                    <h2>Loading ...</h2>
+                </span>
+            </div>
+        </div>
+        <!-- Loader -->
+
         <!-- Menu -->
-        <div class="row row-cols-2 g-4 my-3">
-
-            <div class="col-lg-3 col-md-4 col-sm-6 col-10" v-for="item in restaurant.dishes">
-                <div class=" restaurant-card rounded p-3 my-3 h-100">
-                    <img v-if="item.image" :src="item.image" class="card-img-top px-3" :alt="item.name">
-                    <div class="card-body">
-                        <div class=" fs-4">
-                            <div>
-                                <div class="fq card-text"><strong>{{ item.name }}</strong></div>
-                            </div>
-                            <div class=" d-flex justify-content-between">
-                                <div class="fq">
-                                    €{{ item.price }}
+        <div class="row g-3 my-3">
+            <div class="col col-12" v-for="item in restaurant.dishes">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4" v-if="item.image">
+                            <img v-if="item.image" :src="item.image" class="img-fluid rounded-start"
+                                :alt="item.name + ' img'">
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col col-10">
+                                        <h4>{{ item.name }}</h4>
+                                    </div>
+                                    <div class="col col-2 text-end"><strong>{{ item.price }} €</strong></div>
+                                    <div class="col col-10" v-if="item.description">{{ item.description }}</div>
                                 </div>
-                                <button @click="addToCart(item)" class="btn btn-org fs-5">
-                                    + <i class="fa-solid fa-cart-shopping fs-5"></i>
-                                </button>
+                                <p class="card-text text-end">
+                                    <!-- se il prodotto è disponibile mostra il bottone -->
+                                <div v-if="item.availability">
+                                    <!--  se i prodotti nel carrello appartengono allo stesso ristorante dell'item, l'item viene aggiunto al carrello -->
+                                    <button v-if="checkRestaurantId(item)" @click="addToCart(item)"
+                                        class="btn btn-org fs-5 position-relative">
+                                        + <i class="fa-solid fa-cart-shopping fs-5"></i>
+                                    </button>
+                                    <!-- altimenti viene mostrato il modal -->
+                                    <button v-else data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                        class="btn btn-org fs-5 position-relative">
+                                        + <i class="fa-solid fa-cart-shopping fs-5"></i>
+                                    </button>
+                                </div>
+                                <!-- se il prodotto non è disponibile mostra il badge -->
+                                <span v-else class="badge text-bg-secondary">
+                                    Prodotto non disponibile
+                                </span>
+                                </p>
                             </div>
                         </div>
-                    </div>
-                    <div class="row align-items-center text-center mt-4" v-if="item.availability">
-                        <div class="col col-3 text-end fs-4"><strong>Q.tà:</strong></div>
-                        <div class="col col-4 text-start d-flex align-items-center">
-                            <button class="btn btn-secondary" @click="minusQuantity(item)"
-                                v-bind:disabled="item.quantity === 1">
-                                <i class=" fa-solid fa-minus"></i>
-                            </button>
-                            <strong class="mx-3">{{ item.quantity }}</strong>
-                            <button class="btn btn-secondary" @click="plusQuantity(item)">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
-
-                    </div>
-                    <div v-else class="text-center fs-5">
-                        <span class="badge text-bg-secondary">Prodotto non disponibile</span>
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- Menu -->
     </section>
