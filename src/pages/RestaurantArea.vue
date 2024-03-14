@@ -173,42 +173,45 @@ export default {
 
         <!-- Menu -->
         <div class="row row-cols-2 g-4 my-3">
-            <!-- Itera su ciascun piatto nell'array -->
-            <div class="col restaurant-card rounded p-3 my-3 h-100" v-for="item in restaurant.dishes">
-                <img v-if="item.image" :src="item.image" class="card-img-top px-3" :alt="item.name">
-                <div class="card-body">
-                    <div class=" fs-4">
-                        <div>
-                            <div class="fq card-text"><strong>{{ item.name }}</strong></div>
-                        </div>
-                        <div class=" d-flex justify-content-between">
-                            <div class="fq">
-                                €{{ item.price }}
+
+            <div class="col-lg-3 col-md-4 col-sm-6 col-10" v-for="item in restaurant.dishes">
+                <div class=" restaurant-card rounded p-3 my-3 h-100">
+                    <img v-if="item.image" :src="item.image" class="card-img-top px-3" :alt="item.name">
+                    <div class="card-body">
+                        <div class=" fs-4">
+                            <div>
+                                <div class="fq card-text"><strong>{{ item.name }}</strong></div>
                             </div>
-                            <button @click="addToCart(item)" class="btn btn-org fs-5">
-                                + <i class="fa-solid fa-cart-shopping fs-5"></i>
+                            <div class=" d-flex justify-content-between">
+                                <div class="fq">
+                                    €{{ item.price }}
+                                </div>
+                                <button @click="addToCart(item)" class="btn btn-org fs-5">
+                                    + <i class="fa-solid fa-cart-shopping fs-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center text-center mt-4" v-if="item.availability">
+                        <div class="col col-3 text-end fs-4"><strong>Q.tà:</strong></div>
+                        <div class="col col-4 text-start d-flex align-items-center">
+                            <button class="btn btn-secondary" @click="minusQuantity(item)"
+                                v-bind:disabled="item.quantity === 1">
+                                <i class=" fa-solid fa-minus"></i>
+                            </button>
+                            <strong class="mx-3">{{ item.quantity }}</strong>
+                            <button class="btn btn-secondary" @click="plusQuantity(item)">
+                                <i class="fa-solid fa-plus"></i>
                             </button>
                         </div>
-                    </div>
-                </div>
-                <div class="row align-items-center text-center mt-4" v-if="item.availability">
-                    <div class="col col-3 text-end fs-4"><strong>Q.tà:</strong></div>
-                    <div class="col col-4 text-start d-flex align-items-center">
-                        <button class="btn btn-secondary" @click="minusQuantity(item)"
-                            v-bind:disabled="item.quantity === 1">
-                            <i class=" fa-solid fa-minus"></i>
-                        </button>
-                        <strong class="mx-3">{{ item.quantity }}</strong>
-                        <button class="btn btn-secondary" @click="plusQuantity(item)">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                    </div>
 
-                </div>
-                <div v-else class="text-center fs-5">
-                    <span class="badge text-bg-secondary">Prodotto non disponibile</span>
+                    </div>
+                    <div v-else class="text-center fs-5">
+                        <span class="badge text-bg-secondary">Prodotto non disponibile</span>
+                    </div>
                 </div>
             </div>
+
         </div>
         <!-- Menu -->
     </section>
@@ -254,30 +257,13 @@ export default {
 
 }
 
-@media screen and (max-width:992px) {
-    .restaurant-card {
-        width: calc(100% / 3 - 20px);
-    }
-}
-
-@media screen and (max-width:768px) {
-    .restaurant-card {
-        width: calc(100% / 2 - 20px);
-    }
-}
-
 @media screen and (max-width:576px) {
-    .restaurant-card {
-        width: calc(100% / 1 - 100px);
-        margin: auto;
+    .row-cols-2 {
+        justify-content: center;
+    }
 
-        .card-img-top {
-            padding: 0 20px 0 20px;
-        }
-
-        .fq {
-            font-size: 30px;
-        }
+    .fq {
+        font-size: 30px;
     }
 }
 </style>
