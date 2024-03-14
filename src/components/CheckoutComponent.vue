@@ -44,19 +44,17 @@ export default {
         }).then(response => {
           if (response.data.success) {
             this.$emit('confirmOrder');
-            this.isLoading = false;
+            // this.isLoading = false;
             // alert('Pagamento effettuato con successo. ID Transazione: ' + response.data.transaction_id);
           } else {
-            this.isLoading = false;
             alert('Pagamento non riuscito: ' + response.data.message);
           }
         }).catch(error => {
           console.error('Errore durante il processo di pagamento:', error);
-          this.isLoading = false;
         });
       }).catch(error => {
         console.error('Errore durante la richiesta del metodo di pagamento:', error);
-        this.isLoading = false;
+        this.loading = false;
       });
     }
   }
