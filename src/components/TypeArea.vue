@@ -143,6 +143,17 @@ export default {
 </template>
 
 <style scoped lang="scss">
+
+.type-card {
+    background-color: white;
+    border: 2px solid #FFA500;
+    box-shadow: rgba(0, 0, 0, 0.356) .625rem .625rem;
+    object-fit: cover;
+
+    .form-check {
+        font-size: 22px;
+    }
+}
 .fade-in {
   opacity: 0;
   transition: opacity 1s ease-in-out;
