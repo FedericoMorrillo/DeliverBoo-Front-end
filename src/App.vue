@@ -36,8 +36,8 @@ export default {
 
 <style scoped>
 #giga-container {
-  margin-top: 80px;
-  height: calc(100vh - 80px);
+  margin-top: 71.8px;
+  height: calc(100vh - 71.8px);
   overflow-y: auto;
 }
 </style>
