@@ -276,25 +276,9 @@ export default {
 .imgloading {
     text-align: center;
 }
-<<<<<<< HEAD
-@keyframes changecolor {
-    0%{
-        color: white;
-    }
-
-    50%{
-        color: yellowgreen;
-    }
-
-    100%{
-        color: olivedrab;
-    }
-    
-=======
 // cart preview
 .cart-thumb {
     width: 4.375rem;
->>>>>>> feat/fix_style
 }
 
 .cart-preview {
