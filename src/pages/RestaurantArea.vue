@@ -186,11 +186,11 @@ export default {
                         <div class="col">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col col-10">
+                                    <div class="col col-9">
                                         <h4>{{ item.name }}</h4>
                                     </div>
-                                    <div class="col col-2 text-end"><strong>{{ item.price }} €</strong></div>
-                                    <div class="col col-10" v-if="item.description">{{ item.description }}</div>
+                                    <div class="col col-3 text-end"><strong>{{ item.price }} €</strong></div>
+                                    <div class="col col-9" v-if="item.description">{{ item.description }}</div>
                                 </div>
                                 <p class="card-text text-end">
                                     <!-- se il prodotto è disponibile mostra il bottone -->
