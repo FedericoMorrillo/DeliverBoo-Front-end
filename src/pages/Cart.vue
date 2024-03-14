@@ -101,7 +101,10 @@ export default {
                 })
                     .catch(error => {
                         console.error('Errore durante la conferma dell\'ordine:', error);
-                    });
+                    }).finally(() => {
+                        // Disattiva il loader
+                        this.loading = false;
+                    })
             } else {
                 console.warn('Impossibile confermare un ordine vuoto o con dati utente incompleti.');
             }
