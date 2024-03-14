@@ -46,9 +46,9 @@ body::before {
     height: 100%;
     background-image: url(/public/img/Bg-pattern.JPG);
     background-repeat: repeat;
-    background-size: 200px;
+    background-size: 300px;
     background-position: center;
-    filter: blur(2px);
+    filter: blur(1.5px);
     z-index: -1;
 }
 
