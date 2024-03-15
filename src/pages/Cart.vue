@@ -135,7 +135,7 @@ export default {
 </script>
 
 <template>
-    <div class="cart container">
+    <div class="cart p-0 container">
         <h2 class="mb-3">
             <span class=" text-org">Carrello</span>
         </h2>
