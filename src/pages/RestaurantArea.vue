@@ -32,14 +32,9 @@ export default {
                 }
                 this.saveLocalStorage();
                 this.calculateTotal();
-
-                // Mostra il toast quando il piatto viene aggiunto al carrello
-                const toast = new bootstrap.Toast(document.querySelector('.toast'));
-                const toastBody = document.querySelector('.toast-body');
-                toastBody.textContent = `Hai aggiunto ${product.name} al carrello!`
-                toast.show();
             }
         },
+
         checkRestaurantId(product) {
             if (store.cart.length > 0 && store.cart.find(item => item.restaurant_id !== product.restaurant_id)) {
                 return false;
@@ -47,6 +42,7 @@ export default {
                 return true;
             }
         },
+
         getRestaurant() {
             axios.get('http://localhost:8000/api' + this.$route.path).then((response) => {
                 this.restaurant = response.data.results;
@@ -95,13 +91,13 @@ export default {
             <!-- Intestazione -->
             <div class="d-flex align-items-center my-4 py-3">
                 <!-- Button trigger modal -->
-                <button class="btn border-0 fs-1" v-if="store.cart.length > 0" data-bs-toggle="modal"
+                <button class="btn fs-1" v-if="store.cart.length > 0" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">
                     <i class="fa-solid fa-arrow-left"></i> </button>
                 <!-- Button trigger modal -->
 
                 <!-- Home -->
-                <a class="btn border-0 fs-1" href="/" v-else>
+                <a class="btn fs-1" href="/" v-else>
                     <i class="fa-solid fa-arrow-left"></i> </a>
                 <!-- Home -->
 
@@ -256,57 +252,57 @@ section {
     #toggle_dropdown {
         color: $color8;
     }
-}
 
-#ms_counter {
-    background-color: $color9;
-    color: $color10;
-}
-
-.cart-preview {
-    width: 375px;
-    color: $color8 !important;
-    background-color: rgba(255, 255, 255, .75);
-
-    .cart-thumb {
-        width: 4.375rem;
-    }
-
-    #go-to-cart {
+    #ms_counter {
         background-color: $color9;
         color: $color10;
     }
-}
 
-@keyframes logoduck {
-    0% {
-        transform: rotate(360deg);
+    .cart-preview {
+        width: 375px;
+        color: $color8 !important;
+        background-color: rgba(255, 255, 255, .75);
+
+        .cart-thumb {
+            width: 4.375rem;
+        }
+
+        #go-to-cart {
+            background-color: $color9;
+            color: $color10;
+        }
     }
 
-}
+    @keyframes logoduck {
+        0% {
+            transform: rotate(360deg);
+        }
 
-@media screen and (max-width:576px) {
-    .row-cols-2 {
-        justify-content: center;
     }
 
-    .fq {
-        font-size: 30px;
-    }
-}
+    @media screen and (max-width:576px) {
+        .row-cols-2 {
+            justify-content: center;
+        }
 
-//card
-.dish_card {
-    background-color: $color2 !important;
-    box-shadow: rgba(0, 0, 0, 0.356) .625rem .625rem;
-
-    .dish_description {
-        color: $color5;
+        .fq {
+            font-size: 30px;
+        }
     }
 
-    .not_available {
-        color: $color6;
-        background-color: $color4;
+    //card
+    .dish_card {
+        background-color: $color2 !important;
+        box-shadow: rgba(0, 0, 0, 0.356) .625rem .625rem;
+
+        .dish_description {
+            color: $color5;
+        }
+
+        .not_available {
+            color: $color6;
+            background-color: $color4;
+        }
     }
 }
 </style>
