@@ -44,6 +44,7 @@ export default {
 
 <style scoped lang="scss">
 @use '../assets/scss/variables.scss' as *;
+
 //jumbotron
 .jumbotron {
     height: 100vh;
@@ -97,6 +98,7 @@ export default {
 
             h1 {
                 font-size: 60px;
+                color: $color1b;
             }
         }
 
