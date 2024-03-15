@@ -200,8 +200,8 @@ export default {
             <div class="col col-12" v-for="item in restaurant.dishes">
                 <div class="card mb-3">
                     <div class="row g-0">
-                        <div class="col-md-4 imagrestaurants" v-if="item.image">
-                            <img v-if="item.image" :src="item.image" class="img-fluid rounded-start"
+                        <div class="col-12 col-img col-md-4 imagrestaurants" v-if="item.image">
+                            <img v-if="item.image" :src="item.image" class="img-fluid p-2 rounded-start"
                                 :alt="item.name + ' img'">
                         </div>
                         <div class="col">
@@ -316,13 +316,21 @@ export default {
 
 }
 
-@media screen and (max-width:576px) {
-    .row-cols-2 {
+@media screen and (max-width:768px) {
+    .col-img {
+        display: flex;
         justify-content: center;
     }
+}
 
-    .fq {
-        font-size: 30px;
+@media screen and (max-width:576px) {
+
+    .row-cols-2 {
+        justify-content: center;
+
+        .fq {
+            font-size: 30px;
+        }
     }
 }
 </style>
