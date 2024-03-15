@@ -57,6 +57,7 @@ export default {
             // Svuota completamente il carrello
             store.cart = [];
             this.saveCart();
+            this.showUserDataForm();
         },
         calculateTotal() {
             // Calcola il prezzo totale dei prodotti nel carrello
@@ -144,113 +145,127 @@ export default {
 
 <template>
     <div class="cart p-0 container">
-        <h2 class="mb-3">
-            <span class=" ms_text">Carrello</span>
-        </h2>
-        <table class="table fs-4">
-            <thead>
-                <tr>
-                    <th scope="col">Piatto</th>
-                    <th scope="col">Prezzo</th>
-                    <th scope="col">Quantità</th>
-                    <th scope="col" class="text-center">Elimina</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(item, index) in store.cart" :key="index">
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.price }} &euro;</td>
-                    <td>
-                        <button class="btn btn-secondary" @click="minusQuantity(item)"
-                            v-bind:disabled="item.quantity === 1">
-                            <i class=" fa-solid fa-minus"></i>
-                        </button>
-                        <strong class="mx-3">{{ item.quantity }}</strong>
-                        <button class="btn btn-secondary" @click="plusQuantity(item)">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                    </td>
-                    <td class="text-center">
-                        <button class="btn btn-danger" @click="removeFromCart(index)">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <!-- Intestazione -->
+        <div class="d-flex align-items-center my-4 py-3">
+            <!-- Indietro -->
+            <router-link :to="{ name: RestaurantArea, path: '/restaurants/' + store.restaurant_slug }"
+                class="btn fs-1 border-0" type="button">
+                <i class="fa-solid fa-arrow-left"></i> </router-link>
+            <!-- Indietro -->
 
-        <!-- Mostra il totale del carrello -->
-        <h2 class="text-center">
-            <span class=" ms_text">
-                Totale: {{ total.toFixed(2) }} &euro;
-            </span>
-        </h2>
+            <h2 class="mx-3 fs-1">Carrello</h2>
+        </div>
+        <!-- Intestazione -->
 
-        <router-link :to="{ name: RestaurantArea, path: '/restaurants/' + store.restaurant_slug }"
-            class="btn btn-secondary" type="button">
-            <i class="fa-solid fa-right-to-bracket fa-rotate-180 fs-3"></i>
-        </router-link>
+        <div id="ms_content" v-if="store.cart.length > 0">
+            <!-- Carrello -->
+            <table id="ms_table" class="table bg-transparent fs-4">
+                <thead>
+                    <tr>
+                        <th scope="col" class="col-4 ps-4">Piatto</th>
+                        <th scope="col" class="col-3">Quantità</th>
+                        <th scope="col" class="col-3">Prezzo</th>
+                        <th scope="col" class="col-2 text-center">Elimina</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item, index) in store.cart" :key="index">
+                        <td class="ps-4">{{ item.name }}</td>
+                        <td>
+                            <button class="btn border-0 btn_quantity" @click="minusQuantity(item)"
+                                v-bind:disabled="item.quantity === 1">
+                                <i class=" fa-solid fa-minus"></i>
+                            </button>
+                            <strong class="mx-3">{{ item.quantity }}</strong>
+                            <button class="btn border-0 btn_quantity" @click="plusQuantity(item)">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </td>
+                        <td>{{ item.price }} &euro;</td>
 
-        <!-- Pulsante per svuotare completamente il carrello -->
-        <button class="btn btn-danger mx-2 fs-4" @click="clearCart">Svuota Carrello</button>
-        <!-- Bottone Checkout -->
-        <button class="btn custom_btn fs-4" @click="showUserDataForm">Checkout</button>
+                        <td class="text-center">
+                            <button class="btn text-danger fs-4" @click="removeFromCart(index)">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-        <div class="card mt-3 p-4 mb-4" v-show="showForm">
-            <div class="row">
-                <div class="col col-12 col-md-4">
-                    <!-- Dati utente -->
-                    <form @submit.prevent="confirmOrder">
-                        <h2>Dati dell'utente</h2>
-                        <div class="mb-1">
-                            <label for="name" class="form-label fs-5">Nome</label>
-                            <input type="text" id="name" v-model="userData.name" class="form-control">
-                        </div>
-                        <div class="mb-1">
-                            <label class="form-label fs-5" for="surname">Cognome:</label>
-                            <input type="text" id="surname" v-model="userData.surname" class="form-control">
-                        </div>
-                        <div class="mb-1">
-                            <label class="form-label fs-5" for="phone">Telefono:</label>
-                            <input type="text" id="phone" v-model="userData.phone" class="form-control">
-                        </div>
-                        <div class="mb-1">
-                            <label class="form-label fs-5" for="email">Email:</label>
-                            <input type="email" id="email" v-model="userData.email" class="form-control">
-                        </div>
-                        <div class="mb-1">
-                            <label class="form-label fs-5" for="address">Indirizzo:</label>
-                            <input type="text" id="address" v-model="userData.address" class="form-control">
-                        </div>
-                    </form>
-                </div>
-                <div class="col col-12 col-md-8">
-                    <CheckoutComponent :total="this.total" @confirmOrder="confirmOrder" />
+            <!-- Mostra il totale del carrello -->
+            <h2 class="text-center">
+                <span class=" ms_text">
+                    Totale: {{ total.toFixed(2) }} &euro;
+                </span>
+            </h2>
+            <!-- /Carrello -->
+
+            <div class="text-end">
+                <!-- Pulsante per svuotare completamente il carrello -->
+                <button class="btn btn-danger mx-2 fs-4" @click="clearCart">Svuota Carrello</button>
+                <!-- Bottone Checkout -->
+                <button class="btn custom_btn fs-4" @click="showUserDataForm" v-show="!showForm">Checkout</button>
+            </div>
+
+            <div id="checkout_form" class="rounded my-4 p-4" v-show="showForm">
+                <div class="row">
+                    <div class="col col-12 col-md-5">
+                        <!-- Dati utente -->
+                        <form @submit.prevent="confirmOrder">
+                            <h2>Dati dell'utente</h2>
+                            <div class="mb-1">
+                                <label for="name" class="form-label fs-5">Nome</label>
+                                <input type="text" id="name" v-model="userData.name" class="form-control">
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label fs-5" for="surname">Cognome:</label>
+                                <input type="text" id="surname" v-model="userData.surname" class="form-control">
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label fs-5" for="phone">Telefono:</label>
+                                <input type="text" id="phone" v-model="userData.phone" class="form-control">
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label fs-5" for="email">Email:</label>
+                                <input type="email" id="email" v-model="userData.email" class="form-control">
+                            </div>
+                            <div class="mb-1">
+                                <label class="form-label fs-5" for="address">Indirizzo:</label>
+                                <input type="text" id="address" v-model="userData.address" class="form-control">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col col-12 col-md-7">
+                        <CheckoutComponent :total="this.total" @confirmOrder="confirmOrder" />
+                    </div>
                 </div>
             </div>
+            <PaymentSuccessMessage v-if="message" :message="message" @hide-message="hideMessage" />
         </div>
-        <PaymentSuccessMessage v-if="message" :message="message" @hide-message="hideMessage" />
+
+        <div v-else>Il carrello è vuoto</div>
     </div>
 </template>
 
 <style scoped lang="scss">
-img {
-    height: 25px;
-    width: 25px;
-}
+@use '../assets/scss/variables.scss' as *;
 
-.cart {
-    margin-top: 100px;
-}
+table#ms_table {
 
-.dishes {
-    width: 500px;
-    margin-top: 50px;
-
-    .dish {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    th,
+    td {
+        color: $color8;
+        background-color: $color4 !important;
     }
+
+    .btn_quantity {
+        color: $color10;
+        background-color: $color9;
+    }
+}
+
+#checkout_form {
+    background-color: $color2;
+    color: $color8 !important;
 }
 </style>

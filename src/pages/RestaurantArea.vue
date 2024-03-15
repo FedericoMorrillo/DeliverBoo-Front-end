@@ -95,13 +95,13 @@ export default {
             <!-- Intestazione -->
             <div class="d-flex align-items-center my-4 py-3">
                 <!-- Button trigger modal -->
-                <button class="btn fs-1" v-if="store.cart.length > 0" data-bs-toggle="modal"
+                <button class="btn border-0 fs-1" v-if="store.cart.length > 0" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">
                     <i class="fa-solid fa-arrow-left"></i> </button>
                 <!-- Button trigger modal -->
 
                 <!-- Home -->
-                <a class="btn fs-1" href="/" v-else>
+                <a class="btn border-0 fs-1" href="/" v-else>
                     <i class="fa-solid fa-arrow-left"></i> </a>
                 <!-- Home -->
 

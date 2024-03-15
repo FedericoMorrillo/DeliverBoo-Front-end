@@ -66,6 +66,9 @@ export default {
     <h2>Dati di pagamento</h2>
     <div id="dropin-container"></div>
     <div class="text-end mt-auto">
+      <strong class="fs-5 me-3">
+        Totale: {{ total.toFixed(2) }} &euro;
+      </strong>
       <button id="submit-button" class="btn btn-success fs-4" @click="pay">Conferma e paga</button>
     </div>
     <!-- Loader durante il pagamento -->
