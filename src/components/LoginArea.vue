@@ -15,7 +15,7 @@ export default {
 <!--HTML-->
 
 <template>
-    <header class="fs-5 fw-medium">
+    <header class="fs-4 fw-medium">
         <div class="container d-flex">
             <!--logo-->
             <div class="logo pt-1">
@@ -46,17 +46,17 @@ export default {
 
 header {
     padding: 10px 0;
-    background-color: $color1;
+    background-color: $color5;
     position: fixed;
     left: 0px;
     right: 0px;
     top: 0px;
     z-index: 9999;
-    color: $color6;
+    color: $color1;
     text-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.5);
 
     .scale:hover {
-        transform: scale(1.2);
+        transform: scale(1.1);
         transition: 0.3s ease-in-out;
     }
 
