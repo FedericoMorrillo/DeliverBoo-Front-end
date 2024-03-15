@@ -243,7 +243,7 @@ export default {
             <PaymentSuccessMessage v-if="message" :message="message" @hide-message="hideMessage" />
         </div>
 
-        <div v-else>Il carrello è vuoto</div>
+        <h2 v-else class="display-4 text-center">Il carrello è vuoto</h2>
     </div>
 </template>
 
