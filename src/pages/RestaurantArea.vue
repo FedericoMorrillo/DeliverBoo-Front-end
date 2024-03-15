@@ -92,7 +92,7 @@ export default {
             <div class="d-flex align-items-center my-4 py-3">
                 <!-- Button trigger modal -->
                 <button class="btn fs-1 border-0" v-if="store.cart.length > 0" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">
+                    data-bs-target="#ms_modal">
                     <i class="fa-solid fa-arrow-left"></i> </button>
                 <!-- Button trigger modal -->
 
@@ -103,25 +103,26 @@ export default {
 
                 <h2 class="mx-3 fs-1">Menù</h2>
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
+                <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="ms_modal" tabindex="-1"
+                    aria-labelledby="ms_modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Attenzione!</h1>
+                                <h1 class="modal-title fs-3" id="ms_modalLabel">Attenzione!</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                     id="closeModal"></button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body fs-4">
                                 Puoi ordinare prodotti da un solo ristorante alla volta.
+                                <br>
                                 Per continuare devi prima svuotare il carrello o completare il tuo ordine!
                             </div>
                             <div class="modal-footer">
-                                <button @click="clearCart" class="btn btn-danger" data-bs-dismiss="modal">
+                                <button @click="clearCart" class="btn btn-danger fs-5" data-bs-dismiss="modal">
                                     Svuota il carrello
                                 </button>
-                                <router-link :to="{ name: Cart, path: '/cart' }" class="btn btn-primary" type="button"
-                                    @click="closeModal">
+                                <router-link :to="{ name: Cart, path: '/cart' }" class="btn custom_btn fs-5"
+                                    type="button" @click="closeModal">
                                     Completa il tuo ordine
                                 </router-link>
                             </div>
@@ -205,7 +206,7 @@ export default {
                                             + <i class="fa-solid fa-cart-shopping fs-5"></i>
                                         </button>
                                         <!-- altimenti viene mostrato il modal -->
-                                        <button v-else data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                        <button v-else data-bs-toggle="modal" data-bs-target="#ms_modal"
                                             class="btn custom_btn fs-5 position-relative">
                                             + <i class="fa-solid fa-cart-shopping fs-5"></i>
                                         </button>
@@ -234,8 +235,8 @@ export default {
 @use '../assets/scss/variables.scss' as *;
 
 section {
-    color: $color8;
 
+    // Loader
     .ms_loader {
         text-align: center;
 
@@ -247,6 +248,11 @@ section {
             margin-right: 20px;
         }
     }
+
+    // Modal
+    // #ms_modal{
+    //     margin-top: 200px;
+    // }
 
     // cart preview
     #toggle_dropdown {
