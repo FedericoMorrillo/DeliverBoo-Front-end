@@ -32,9 +32,14 @@ export default {
                 }
                 this.saveLocalStorage();
                 this.calculateTotal();
+
+                // Mostra il toast quando il piatto viene aggiunto al carrello
+                const toast = new bootstrap.Toast(document.querySelector('.toast'));
+                const toastBody = document.querySelector('.toast-body');
+                toastBody.textContent = `Hai aggiunto ${product.name} al carrello!`
+                toast.show();
             }
         },
-
         checkRestaurantId(product) {
             if (store.cart.length > 0 && store.cart.find(item => item.restaurant_id !== product.restaurant_id)) {
                 return false;
@@ -42,7 +47,6 @@ export default {
                 return true;
             }
         },
-
         getRestaurant() {
             axios.get('http://localhost:8000/api' + this.$route.path).then((response) => {
                 this.restaurant = response.data.results;
@@ -175,16 +179,22 @@ export default {
         <div class="d-flex flexxato">
             <div class="imgrestaurantbg col-12 col-md-10">
                 <!-- <img  class="img-fluid" :src="restaurant.image" :alt="restaurant.name"> -->
-                <h2>Benvenuti  in <span class="namerestaurant">{{ restaurant.name }}</span></h2>
-                <p>L'app quack delivery ti consente di ordinare cibo o prodotti direttamente dal tuo telefono e riceverli comodamente a casa tua. Con un'ampia selezione di ristoranti e negozi disponibili, puoi scegliere tra una vasta gamma di piatti e prodotti per soddisfare i tuoi gusti e bisogni. Grazie alla tracciabilità degli ordini in tempo reale, puoi monitorare il progresso della consegna e ricevere notifiche sullo stato del tuo ordine. Con un'interfaccia intuitiva e facile da usare, l'app delivery rende il processo di ordinare e ricevere cibo o prodotti più semplice e conveniente che mai.</p>
+                <h2>Benvenuti in <span class="namerestaurant">{{ restaurant.name }}</span></h2>
+                <p>L'app quack delivery ti consente di ordinare cibo o prodotti direttamente dal tuo telefono e
+                    riceverli comodamente a casa tua. Con un'ampia selezione di ristoranti e negozi disponibili, puoi
+                    scegliere tra una vasta gamma di piatti e prodotti per soddisfare i tuoi gusti e bisogni. Grazie
+                    alla tracciabilità degli ordini in tempo reale, puoi monitorare il progresso della consegna e
+                    ricevere notifiche sullo stato del tuo ordine. Con un'interfaccia intuitiva e facile da usare, l'app
+                    delivery rende il processo di ordinare e ricevere cibo o prodotti più semplice e conveniente che
+                    mai.</p>
             </div>
-            
+
             <div class="imgrestaurantbg col col-md-2">
-                <img  class="img-fluid" :src="restaurant.image" :alt="restaurant.name">
+                <img class="img-fluid" :src="restaurant.image" :alt="restaurant.name">
             </div>
         </div>
         <div class="menu">
-                <strong class="px-3 py-2 rounded btn-org mx-3 fs-3">Menù</strong>
+            <strong class="px-3 py-2 rounded btn-org mx-3 fs-3">Menù</strong>
         </div>
         <div class="row g-3 my-3">
             <div class="col col-12" v-for="item in restaurant.dishes">
@@ -229,6 +239,18 @@ export default {
             </div>
         </div>
         <!-- Menu -->
+        <!-- Toast di Bootstrap -->
+        <div class="toast-container position-fixed bottom-0 end-0 p-3" role="alert" aria-live="assertive"
+            aria-atomic="true" data-bs-delay="2000">
+            <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">Carrello</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body"></div>
+            </div>
+        </div>
+        <!-- /Toast di Bootstrap -->
     </section>
 </template>
 
@@ -237,7 +259,6 @@ export default {
 <!--CSS-->
 
 <style scoped lang="scss">
-
 .type-card {
     background-color: white;
     border: 2px solid #FFA500;
@@ -248,6 +269,7 @@ export default {
         font-size: 22px;
     }
 }
+
 .stylesection {
     margin-top: 100px;
 }
@@ -276,6 +298,7 @@ export default {
 .imgloading {
     text-align: center;
 }
+
 // cart preview
 .cart-thumb {
     width: 4.375rem;

@@ -2,14 +2,18 @@
 import axios from 'axios';
 import { store } from '../store'
 import CheckoutComponent from '../components/CheckoutComponent.vue';
+import PaymentSuccessMessage from '../components/PaymentSuccessMessage.vue'
+
 export default {
     name: 'Cart',
     components: {
         CheckoutComponent,
+        PaymentSuccessMessage
     },
     data() {
         return {
             store,
+            message: null,
             showForm: false, // Inizializza la visibilità del modulo a falso
             // dishes: [],
             selectedProductIndex: null, // Indice del prodotto selezionato dall'utente
@@ -98,6 +102,7 @@ export default {
                     // Puoi resettare il carrello e i dati utente dopo che l'ordine è stato confermato
                     this.clearCart();
                     this.clearUserData();
+                    this.message = 'Pagamento effettuato con successo!';
                 })
                     .catch(error => {
                         console.error('Errore durante la conferma dell\'ordine:', error);
@@ -120,6 +125,9 @@ export default {
                 this.saveCart();
             }
         },
+        hideMessage() {
+            this.message = null;
+        }
     },
     created() {
         // this.getDishes();
@@ -221,8 +229,8 @@ export default {
                 </div>
             </div>
         </div>
+        <PaymentSuccessMessage v-if="message" :message="message" @hide-message="hideMessage" />
     </div>
-
 </template>
 
 <style scoped lang="scss">
