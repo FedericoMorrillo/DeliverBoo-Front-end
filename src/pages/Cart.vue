@@ -144,7 +144,7 @@ export default {
 </script>
 
 <template>
-    <div class="cart p-0 container">
+    <div class="cart p-0 pb-5 container">
         <!-- Intestazione -->
         <div class="d-flex align-items-center my-4 py-3">
             <!-- Indietro -->

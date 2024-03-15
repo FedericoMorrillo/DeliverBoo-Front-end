@@ -79,7 +79,7 @@ export default {
 <!--HTML-->
 
 <template>
-    <div id="type-area" class="container">
+    <div id="type-area" class="container pb-5">
         <h2 class="text-center my-5 display-4 ms_text">
             Scegli cosa vuoi e noi te lo portiamo!
         </h2>

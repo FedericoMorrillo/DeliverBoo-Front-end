@@ -86,7 +86,7 @@ export default {
 <!--HTML-->
 
 <template>
-    <section>
+    <section class="pb-5">
         <div class="container">
             <!-- Intestazione -->
             <div class="d-flex align-items-center my-4 py-3">
@@ -180,7 +180,7 @@ export default {
 
             <!-- Menu -->
             <div class="row g-3 my-3">
-                <div class="col col-6" v-for="item in restaurant.dishes">
+                <div class="col col-12 col-lg-6" v-for="item in restaurant.dishes">
                     <div class="card rounded-4 mb-3 overflow-hidden dish_card">
                         <div class="row g-0">
                             <div class="col-md-4" v-if="item.image">
@@ -189,11 +189,11 @@ export default {
                             <div class="col">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col col-9">
+                                        <div class="col col-8">
                                             <h4 class="fs-1">{{ item.name }}</h4>
                                         </div>
-                                        <div class="col col-3 text-end fs-3"><strong>{{ item.price }} €</strong></div>
-                                        <p class="col col-9 fw-light dish_description" v-if="item.description">
+                                        <div class="col col-4 text-end fs-3"><strong>{{ item.price }} €</strong></div>
+                                        <p class="col col-8 fw-light dish_description" v-if="item.description">
                                             {{ item.description }}
                                         </p>
                                     </div>
