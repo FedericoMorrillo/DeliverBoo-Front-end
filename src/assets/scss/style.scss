@@ -18,26 +18,21 @@ a {
 //reset
 body {
     overflow: hidden;
-    background-color: $color6;
+    background-color: $color1;
 }
 
 //colori layout
-.text-org {
+.ms_text {
     font-family: "Nunito", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 900;
-    font-style: normal;
-    color: white;
-    text-shadow: 3px 3px 3px rgba(205, 57, 51, 1);
-    // -webkit-text-stroke-width: 2px;
-    // -webkit-text-stroke-color: rgba(205, 57, 51, 1);
-    // background-color: rgba(0, 0, 0, .5);
-    padding: .5rem;
-    border-radius: .9375rem;
 }
 
 .btn-org {
-    color: $color6;
-    background-color: $color1;
+    color: $color1;
+    background-color: $color6;
     border: none;
+}
+
+.btn-org:hover {
+    color: $color9;
+    background-color: $color5;
 }

@@ -137,7 +137,7 @@ export default {
 <template>
     <div class="cart container">
         <h2 class="mb-3">
-            <span class=" text-org">Carrello</span>
+            <span class=" ms_text">Carrello</span>
         </h2>
         <table class="table fs-4">
             <thead>
@@ -173,7 +173,7 @@ export default {
 
         <!-- Mostra il totale del carrello -->
         <h2 class="text-center">
-            <span class=" text-org">
+            <span class=" ms_text">
                 Totale: {{ total.toFixed(2) }} &euro;
             </span>
         </h2>
