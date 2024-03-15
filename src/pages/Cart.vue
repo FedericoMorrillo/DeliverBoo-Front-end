@@ -194,7 +194,7 @@ export default {
         <!-- Pulsante per svuotare completamente il carrello -->
         <button class="btn btn-danger mx-2 fs-4" @click="clearCart">Svuota Carrello</button>
         <!-- Bottone Checkout -->
-        <button class="btn btn-org fs-4" @click="showUserDataForm">Checkout</button>
+        <button class="btn custom_btn fs-4" @click="showUserDataForm">Checkout</button>
 
         <div class="card mt-3 p-4 mb-4" v-show="showForm">
             <div class="row">
