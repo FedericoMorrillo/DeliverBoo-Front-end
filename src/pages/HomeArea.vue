@@ -29,7 +29,7 @@ export default {
 
             <!--btn jumbo-->
             <div class="mt-2">
-                <a class="btn btn-org fs-3" href="#type-area" data-scroll="">Cosa vuoi mangiare?</a>
+                <a class="btn custom_btn fs-3" href="#type-area" data-scroll="">Cosa vuoi mangiare?</a>
             </div>
             <!--/btn jumbo -->
         </div>

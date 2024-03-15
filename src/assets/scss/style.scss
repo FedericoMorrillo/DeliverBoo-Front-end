@@ -18,7 +18,7 @@ a {
 //reset
 body {
     overflow: hidden;
-    background-color: $color1;
+    background-color: $color3;
 }
 
 //colori layout
@@ -26,13 +26,13 @@ body {
     font-family: "Nunito", sans-serif;
 }
 
-.btn-org {
+.custom_btn {
     color: $color1;
     background-color: $color6;
     border: none;
 }
 
-.btn-org:hover {
+.custom_btn:hover {
     color: $color9;
     background-color: $color5;
 }

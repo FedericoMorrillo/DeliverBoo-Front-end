@@ -86,149 +86,143 @@ export default {
 <!--HTML-->
 
 <template>
-    <section class="container stylesection">
-        <!-- Intestazione -->
-        <div class="d-flex align-items-center">
-            <!-- Button trigger modal -->
-            <div>
-                <button class="btn btn-secondary" v-if="store.cart.length > 0" data-bs-toggle="modal"
+    <section>
+        <div class="container">
+            <!-- Intestazione -->
+            <div class="d-flex align-items-center my-4 py-3">
+                <!-- Button trigger modal -->
+                <button class="btn fs-1" v-if="store.cart.length > 0" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">
-                    <i class="fa-solid fa-right-to-bracket fa-rotate-180 fs-2"></i>
-                </button>
-                <a class="btn btn-secondary" href="/" v-else>
-                    <i class="fa-solid fa-right-to-bracket fa-rotate-180 fs-2"></i>
-                </a>
-            </div>
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Attenzione!</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                                id="closeModal"></button>
-                        </div>
-                        <div class="modal-body">
-                            Puoi ordinare prodotti da un solo ristorante alla volta.
-                            Per continuare devi prima svuotare il carrello o completare il tuo ordine!
-                        </div>
-                        <div class="modal-footer">
-                            <button @click="clearCart" class="btn btn-danger" data-bs-dismiss="modal">
-                                Svuota il carrello
-                            </button>
-                            <router-link :to="{ name: Cart, path: '/cart' }" class="btn btn-primary" type="button"
-                                @click="closeModal">
-                                Completa il tuo ordine
-                            </router-link>
+                    <i class="fa-solid fa-arrow-left"></i> </button>
+                <!-- Button trigger modal -->
+
+                <!-- Home -->
+                <a class="btn fs-1" href="/" v-else>
+                    <i class="fa-solid fa-arrow-left"></i> </a>
+                <!-- Home -->
+
+                <h2 class="mx-3 fs-1">Menù</h2>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Attenzione!</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                    id="closeModal"></button>
+                            </div>
+                            <div class="modal-body">
+                                Puoi ordinare prodotti da un solo ristorante alla volta.
+                                Per continuare devi prima svuotare il carrello o completare il tuo ordine!
+                            </div>
+                            <div class="modal-footer">
+                                <button @click="clearCart" class="btn btn-danger" data-bs-dismiss="modal">
+                                    Svuota il carrello
+                                </button>
+                                <router-link :to="{ name: Cart, path: '/cart' }" class="btn btn-primary" type="button"
+                                    @click="closeModal">
+                                    Completa il tuo ordine
+                                </router-link>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Modal -->
+                <!-- Modal -->
 
-            <div class="ms-auto">
                 <!-- Anteprima carrello -->
-                <div class="dropdown">
-                    <button type="button" class="btn btncart position-relative dropdown-toggle"
+                <div class="dropdown ms-auto">
+                    <button type="button" id="toggle_dropdown" class="btn border-0 position-relative"
                         data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                         <i class="fa-solid fa-cart-shopping fs-1"></i>
-                        <span
-                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary fs-5">
+                        <span v-show="store.counter > 0" id="ms_counter"
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill fs-5">
                             {{ store.counter }}
                         </span>
                     </button>
                     <div class="dropdown-menu p-4 cart-preview">
-                        <ul class="p-0">
-                            <li v-for="item in store.cart" class="border-bottom py-2 d-flex gap-2">
+                        <ul v-if="store.cart.length > 0" class="p-0">
+                            <li v-for="item in store.cart" class="py-2 d-flex gap-2">
                                 <img :src="item.image" :alt="item.name" class="cart-thumb">
                                 <div>
                                     <h5>{{ item.name }}</h5>
                                     {{ item.price }} &euro; x {{ item.quantity }}
                                 </div>
                             </li>
-                            <li class="py-2">
-                                Totale: {{ total.toFixed(2) }} &euro;
-                            </li>
                         </ul>
-                        <router-link :to="{ name: Cart, path: '/cart' }" class="btn btn-primary" type="button">
-                            Vai al carrello
-                        </router-link>
+                        <span v-else>Il carrello è vuoto</span>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <strong class="py-2">Totale: {{ total.toFixed(2) }} &euro;</strong>
+                            <div>
+                                <router-link :to="{ name: Cart, path: '/cart' }" id="go-to-cart" class="btn"
+                                    type="button">
+                                    Vai al carrello
+                                </router-link>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Anteprima carrello -->
             </div>
-        </div>
-        <!-- Intestazione -->
+            <!-- Intestazione -->
 
-        <!-- Loader -->
-        <div v-if="restaurant.length === 0" class="mt-5 pt-5">
-            <div class="imgloading">
-                <img src="/img/logo.jpeg" alt="Logo"> <span>
-                    <h2>Loading ...</h2>
-                </span>
+            <!-- Loader -->
+            <div v-if="restaurant.length === 0" class="mt-5 pt-5">
+                <div class="ms_loader">
+                    <img src="/img/logo.jpeg" alt="Logo"> <span>
+                        <h2>Loading ...</h2>
+                    </span>
+                </div>
             </div>
-        </div>
-        <!-- Loader -->
+            <!-- Loader -->
 
-        <!-- Menu -->
-        <div class="d-flex flexxato">
-            <div class="imgrestaurantbg col-12 col-md-10">
-                <!-- <img  class="img-fluid" :src="restaurant.image" :alt="restaurant.name"> -->
-                <h2>Benvenuti  in <span class="namerestaurant">{{ restaurant.name }}</span></h2>
-                <p>L'app quack delivery ti consente di ordinare cibo o prodotti direttamente dal tuo telefono e riceverli comodamente a casa tua. Con un'ampia selezione di ristoranti e negozi disponibili, puoi scegliere tra una vasta gamma di piatti e prodotti per soddisfare i tuoi gusti e bisogni. Grazie alla tracciabilità degli ordini in tempo reale, puoi monitorare il progresso della consegna e ricevere notifiche sullo stato del tuo ordine. Con un'interfaccia intuitiva e facile da usare, l'app delivery rende il processo di ordinare e ricevere cibo o prodotti più semplice e conveniente che mai.</p>
-            </div>
-            
-            <div class="imgrestaurantbg col col-md-2">
-                <img  class="img-fluid" :src="restaurant.image" :alt="restaurant.name">
-            </div>
-        </div>
-        <div class="menu">
-                <strong class="px-3 py-2 rounded btn-org mx-3 fs-3">Menù</strong>
-        </div>
-        <div class="row g-3 my-3">
-            <div class="col col-12" v-for="item in restaurant.dishes">
-                <div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-4 imagrestaurants" v-if="item.image">
-                            <img v-if="item.image" :src="item.image" class="img-fluid rounded-start"
-                                :alt="item.name + ' img'">
-                        </div>
-                        <div class="col">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col col-9">
-                                        <h4>{{ item.name }}</h4>
+            <!-- Menu -->
+            <div class="row g-3 my-3">
+                <div class="col col-6" v-for="item in restaurant.dishes">
+                    <div class="card rounded-4 mb-3 overflow-hidden dish_card">
+                        <div class="row g-0">
+                            <div class="col-md-4" v-if="item.image">
+                                <img v-if="item.image" :src="item.image" class="img-fluid" :alt="item.name + ' img'">
+                            </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col col-9">
+                                            <h4 class="fs-1">{{ item.name }}</h4>
+                                        </div>
+                                        <div class="col col-3 text-end fs-3"><strong>{{ item.price }} €</strong></div>
+                                        <p class="col col-9 fw-light dish_description" v-if="item.description">
+                                            {{ item.description }}
+                                        </p>
                                     </div>
-                                    <div class="col col-3 text-end"><strong>{{ item.price }} €</strong></div>
-                                    <div class="col col-9" v-if="item.description">{{ item.description }}</div>
+                                    <p class="card-text text-end">
+                                        <!-- se il prodotto è disponibile mostra il bottone -->
+                                    <div v-if="item.availability">
+                                        <!--  se i prodotti nel carrello appartengono allo stesso ristorante dell'item, l'item viene aggiunto al carrello -->
+                                        <button v-if="checkRestaurantId(item)" @click="addToCart(item)"
+                                            class="btn custom_btn fs-5 position-relative">
+                                            + <i class="fa-solid fa-cart-shopping fs-5"></i>
+                                        </button>
+                                        <!-- altimenti viene mostrato il modal -->
+                                        <button v-else data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            class="btn custom_btn fs-5 position-relative">
+                                            + <i class="fa-solid fa-cart-shopping fs-5"></i>
+                                        </button>
+                                    </div>
+                                    <!-- se il prodotto non è disponibile mostra il badge -->
+                                    <span v-else class="badge fs-6 fw-normal not_available">
+                                        Prodotto non disponibile
+                                    </span>
+                                    </p>
                                 </div>
-                                <p class="card-text text-end">
-                                    <!-- se il prodotto è disponibile mostra il bottone -->
-                                <div v-if="item.availability">
-                                    <!--  se i prodotti nel carrello appartengono allo stesso ristorante dell'item, l'item viene aggiunto al carrello -->
-                                    <button v-if="checkRestaurantId(item)" @click="addToCart(item)"
-                                        class="btn btn-org fs-5 position-relative">
-                                        + <i class="fa-solid fa-cart-shopping fs-5"></i>
-                                    </button>
-                                    <!-- altimenti viene mostrato il modal -->
-                                    <button v-else data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        class="btn btn-org fs-5 position-relative">
-                                        + <i class="fa-solid fa-cart-shopping fs-5"></i>
-                                    </button>
-                                </div>
-                                <!-- se il prodotto non è disponibile mostra il badge -->
-                                <span v-else class="badge text-bg-secondary">
-                                    Prodotto non disponibile
-                                </span>
-                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Menu -->
         </div>
-        <!-- Menu -->
     </section>
 </template>
 
@@ -237,69 +231,78 @@ export default {
 <!--CSS-->
 
 <style scoped lang="scss">
+@use '../assets/scss/variables.scss' as *;
 
-.type-card {
-    background-color: white;
-    border: 2px solid #FFA500;
-    box-shadow: rgba(0, 0, 0, 0.356) .625rem .625rem;
-    object-fit: cover;
+section {
+    color: $color8;
 
-    .form-check {
-        font-size: 22px;
-    }
-}
-.stylesection {
-    margin-top: 100px;
-}
+    .ms_loader {
+        text-align: center;
 
-.modal-dialog {
-    margin-top: 100px;
-}
-
-.addcart:hover {
-    background-color: greenyellow;
-
-}
-
-.imgloading img {
-    width: 100px;
-    animation: logoduck 1s infinite ease-in-out;
-    transition: 0.5s;
-    border-radius: 20px;
-    margin-right: 20px;
-}
-
-.btncart {
-    background-color: lightblue;
-}
-
-.imgloading {
-    text-align: center;
-}
-// cart preview
-.cart-thumb {
-    width: 4.375rem;
-}
-
-.cart-preview {
-    width: 18.75rem;
-}
-
-// cart preview
-@keyframes logoduck {
-    0% {
-        transform: rotate(360deg);
+        & img {
+            width: 100px;
+            animation: logoduck 1s infinite ease-in-out;
+            transition: 0.5s;
+            border-radius: 20px;
+            margin-right: 20px;
+        }
     }
 
-}
-
-@media screen and (max-width:576px) {
-    .row-cols-2 {
-        justify-content: center;
+    // cart preview
+    #toggle_dropdown {
+        color: $color8;
     }
 
-    .fq {
-        font-size: 30px;
+    #ms_counter {
+        background-color: $color9;
+        color: $color10;
+    }
+
+    .cart-preview {
+        width: 375px;
+        color: $color8 !important;
+        background-color: rgba(255, 255, 255, .75);
+
+        .cart-thumb {
+            width: 4.375rem;
+        }
+
+        #go-to-cart {
+            background-color: $color9;
+            color: $color10;
+        }
+    }
+
+    @keyframes logoduck {
+        0% {
+            transform: rotate(360deg);
+        }
+
+    }
+
+    @media screen and (max-width:576px) {
+        .row-cols-2 {
+            justify-content: center;
+        }
+
+        .fq {
+            font-size: 30px;
+        }
+    }
+
+    //card
+    .dish_card {
+        background-color: $color2 !important;
+        box-shadow: rgba(0, 0, 0, 0.356) .625rem .625rem;
+
+        .dish_description {
+            color: $color5;
+        }
+
+        .not_available {
+            color: $color6;
+            background-color: $color4;
+        }
     }
 }
 </style>
