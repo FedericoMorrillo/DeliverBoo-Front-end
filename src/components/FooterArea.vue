@@ -1,7 +1,9 @@
 <!--JS-->
 
 <script>
-export default {}
+export default {
+    name: 'Footer',
+}
 </script>
 
 <!--/JS-->
@@ -11,8 +13,8 @@ export default {}
 <template>
     <!--footer-->
     <footer class="mt-auto">
-        <div class="container py-3">
-            <div class="text-secondary">By Boolean #110</div>
+        <div class="container py-3 text-end">
+            <div class="fw-light fs-5">By Boolean #110 - Team 3</div>
         </div>
     </footer>
     <!--footer-->
@@ -22,5 +24,12 @@ export default {}
 
 <!--CSS-->
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@use '../assets/scss/variables.scss' as *;
+
+footer {
+    background-color: $color8;
+    color: $color2;
+}
+</style>
 <!--/CSS-->
