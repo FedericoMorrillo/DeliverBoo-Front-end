@@ -50,8 +50,7 @@ export default {
 <style scoped lang="scss">
 @use '../assets/scss/variables.scss' as *;
 
-//jumbotron
-.jumbotron {
+#jumbotron {
     height: 100vh;
     justify-content: center;
     align-items: center;
