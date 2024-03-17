@@ -93,7 +93,7 @@ export default {
 
         <ul class="row g-4 px-0 py-3 mw-100 flex-nowrap overflow-x-auto">
             <!-- Itera su ciascun tipo nell'array types -->
-            <li class=" col-5 col-sm-4 col-md-3 col-lg-2 col-xl-1" v-for="item in types">
+            <li class="col-6 col-md-4 col-lg-3 col-xl-1" v-for="item in types">
                 <div class="type-card rounded" :key="item.id" @click="toggleType(item.id)"
                     :class="{ 'ms_active': selectedTypes.includes(item.id) }">
                     <div role="button" class="card-body">
@@ -119,7 +119,7 @@ export default {
 
             <ul class="row py-3 g-4 mw-100 flex-nowrap overflow-x-auto">
                 <!-- Itera su ciascun tipo nell'array types -->
-                <li class="col-6 col-sm-4 col-md-3 col-lg-2" v-for="item in filteredRestaurants">
+                <li class="col-12 col-md-6 col-lg-2" v-for="item in filteredRestaurants">
                     <router-link :to="{ name: RestaurantArea, path: '/restaurants/' + item.slug }"
                         @click="setRestaurant(item)" :key="item.id">
                         <div class="rounded restaurant-card h-100">
@@ -180,7 +180,7 @@ h4 {
 }
 
 .restaurant-card {
-    background-color: $color1;
+    background-color: $color4;
     border: 2px solid $color9;
     box-shadow: rgba(0, 0, 0, 0.356) .625rem .625rem;
 
