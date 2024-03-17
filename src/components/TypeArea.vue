@@ -129,7 +129,7 @@ export default {
                                     {{ item.name }}
                                 </div>
                                 <div class="row g-2 p-3">
-                                    <div class="col col-6" v-for="category in item.types">
+                                    <div class="col-12 col-lg-6" v-for="category in item.types">
                                         <span class="badge w-100 fs-6 fw-semibold ms_badge" :key="category.id"
                                             :class="{ 'ms_badge_active': selectedTypes.includes(category.id) }">
                                             {{ category.name }}
