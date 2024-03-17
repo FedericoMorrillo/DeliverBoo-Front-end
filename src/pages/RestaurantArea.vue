@@ -183,8 +183,8 @@ export default {
                 <div class="col col-12 col-lg-6" v-for="item in restaurant.dishes">
                     <div class="card rounded-4 mb-3 overflow-hidden dish_card">
                         <div class="row g-0">
-                            <div class="col-md-4" v-if="item.image">
-                                <img v-if="item.image" :src="item.image" class="img-fluid" :alt="item.name + ' img'">
+                            <div class="col-md-4 overflow-hidden" v-if="item.image">
+                                <img v-if="item.image" :src="item.image" class="dish_img" :alt="item.name + ' img'">
                             </div>
                             <div class="col">
                                 <div class="card-body">
@@ -300,6 +300,17 @@ section {
     .dish_card {
         background-color: $color2 !important;
         box-shadow: rgba(0, 0, 0, 0.356) .625rem .625rem;
+
+        .dish_img {
+            width: 100%;
+        }
+
+        @media screen and (min-width: 768px) {
+            .dish_img {
+                height: 250px;
+                width: auto;
+            }
+        }
 
         .dish_description {
             color: $color5;
