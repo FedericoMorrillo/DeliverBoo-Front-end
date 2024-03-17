@@ -155,8 +155,8 @@ h2 {
 }
 
 h4 {
-    color: $color4;
-    text-shadow: 3px 3px 3px $color6 ;
+    color: $color6;
+    text-shadow: 3px 3px 3px $color4 ;
 }
 
 .type-card {

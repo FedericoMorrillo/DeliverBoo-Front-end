@@ -101,7 +101,7 @@ export default {
                     <i class="fa-solid fa-arrow-left"></i> </a>
                 <!-- Home -->
 
-                <h2 class="mx-3 fs-1">Menù</h2>
+                <h2 class="mx-3 fs-1">{{ restaurant.name }} - Menù</h2>
                 <!-- Modal -->
                 <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="ms_modal" tabindex="-1"
                     aria-labelledby="ms_modalLabel" aria-hidden="true">
