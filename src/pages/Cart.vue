@@ -154,6 +154,9 @@ export default {
         </div>
         <!-- Intestazione -->
 
+        <PaymentSuccessMessage v-show="message" :message="message" @hide-message="hideMessage" />
+
+
         <div id="ms_content" v-if="store.cart.length > 0">
             <!-- Carrello -->
             <table id="ms_table" class="table bg-transparent fs-4">
@@ -240,7 +243,6 @@ export default {
         </div>
 
         <h2 v-else class="display-4 text-center">Il carrello è vuoto</h2>
-        <PaymentSuccessMessage v-show="message" :message="message" @hide-message="hideMessage" />
 
     </div>
 </template>
