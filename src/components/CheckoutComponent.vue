@@ -44,10 +44,10 @@ export default {
         }).then(response => {
           if (response.data.success) {
             this.$emit('confirmOrder');
-            // this.isLoading = false;
+            this.isLoading = false;
             // alert('Pagamento effettuato con successo. ID Transazione: ' + response.data.transaction_id);
           } else {
-            alert('Pagamento non riuscito: ' + response.data.message);
+            console.error('Pagamento non riuscito: ' + response.data.message);
           }
         }).catch(error => {
           console.error('Errore durante il processo di pagamento:', error);
