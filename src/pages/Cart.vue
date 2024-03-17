@@ -237,10 +237,11 @@ export default {
                     </div>
                 </div>
             </div>
-            <PaymentSuccessMessage v-show="message" :message="message" @hide-message="hideMessage" />
         </div>
 
         <h2 v-else class="display-4 text-center">Il carrello è vuoto</h2>
+        <PaymentSuccessMessage v-show="message" :message="message" @hide-message="hideMessage" />
+
     </div>
 </template>
 
