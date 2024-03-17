@@ -79,21 +79,21 @@ export default {
 <!--HTML-->
 
 <template>
-    <div id="type-area" class="container pb-5">
+    <div id="type-area" class="px-3 pb-5">
         <h2 class="text-center my-5 display-4 ms_text">
             Scegli cosa vuoi e noi te lo portiamo!
         </h2>
 
         <!--Tipologie-->
         <div>
-            <h4 class="mb-3 fs-2 ms_text">
+            <h4 class="fs-2 ms_text">
                 Attualmente sono disponibili {{ types.length }} Tipologie di Ristoranti
             </h4>
         </div>
 
-        <div class="row g-4">
+        <ul class="row g-4 px-0 py-3 mw-100 flex-nowrap overflow-x-auto">
             <!-- Itera su ciascun tipo nell'array types -->
-            <div class=" col-6 col-sm-4 col-md-3 col-lg-2" v-for="item in types">
+            <li class=" col-5 col-sm-4 col-md-3 col-lg-2 col-xl-1" v-for="item in types">
                 <div class="type-card rounded" :key="item.id" @click="toggleType(item.id)"
                     :class="{ 'ms_active': selectedTypes.includes(item.id) }">
                     <div role="button" class="card-body">
@@ -107,19 +107,19 @@ export default {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </li>
+        </ul>
         <!-- /Tipologie-->
 
         <!--Ristoranti-->
-        <div class="mt-5">
-            <h4 class="mb-3 fs-2 ms_text">
+        <div class="mt-3">
+            <h4 class="fs-2 ms_text">
                 Ristoranti trovati: {{ filteredRestaurants.length }}
             </h4>
 
-            <div class="row g-4">
+            <ul class="row py-3 g-4 mw-100 flex-nowrap overflow-x-auto">
                 <!-- Itera su ciascun tipo nell'array types -->
-                <div class="col-10 col-sm-6 col-md-4 col-lg-3" v-for="item in filteredRestaurants">
+                <li class="col-6 col-sm-4 col-md-3 col-lg-2" v-for="item in filteredRestaurants">
                     <router-link :to="{ name: RestaurantArea, path: '/restaurants/' + item.slug }"
                         @click="setRestaurant(item)" :key="item.id">
                         <div class="rounded restaurant-card h-100">
@@ -139,9 +139,9 @@ export default {
                             </div>
                         </div>
                     </router-link>
-                </div>
+                </li>
+            </ul>
 
-            </div>
         </div>
         <!--/Ristoranti-->
     </div>
