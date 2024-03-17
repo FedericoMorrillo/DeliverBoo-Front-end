@@ -104,13 +104,12 @@ export default {
                     this.clearCart();
                     this.clearUserData();
                     this.message = 'Pagamento effettuato con successo!';
+                }).catch(error => {
+                    console.error('Errore durante la conferma dell\'ordine:', error);
+                }).finally(() => {
+                    // Disattiva il loader
+                    this.loading = false;
                 })
-                    .catch(error => {
-                        console.error('Errore durante la conferma dell\'ordine:', error);
-                    }).finally(() => {
-                        // Disattiva il loader
-                        this.loading = false;
-                    })
             } else {
                 console.warn('Impossibile confermare un ordine vuoto o con dati utente incompleti.');
             }
@@ -131,8 +130,6 @@ export default {
         }
     },
     created() {
-        // this.getDishes();
-
         // Carica il carrello dal localStorage all'avvio dell'applicazione
         const savedCart = localStorage.getItem('cart');
         if (savedCart) {
@@ -240,7 +237,7 @@ export default {
                     </div>
                 </div>
             </div>
-            <PaymentSuccessMessage v-if="message" :message="message" @hide-message="hideMessage" />
+            <PaymentSuccessMessage v-show="message" :message="message" @hide-message="hideMessage" />
         </div>
 
         <h2 v-else class="display-4 text-center">Il carrello è vuoto</h2>

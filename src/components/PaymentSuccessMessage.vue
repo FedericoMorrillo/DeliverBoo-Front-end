@@ -12,10 +12,10 @@ export default {
 </script>
 
 <template>
-    <div class="card mt-4 message">
-        <div class="card-body d-flex justify-content-center align-items-center gap-3">
-            <h3>{{ message }}</h3>
-            <a href="/" role="button" class="btn btn-org">Torna alla Home</a>
+    <div class="card mt-4 mx-auto message">
+        <div class="card-body">
+            <h3 class="text-center">{{ message }}</h3>
+            <a href="/" role="button" class="btn custom_btn" @click="hideMessage">Torna alla Home</a>
         </div>
     </div>
 </template>
