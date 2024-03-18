@@ -163,23 +163,25 @@ export default {
                 <thead>
                     <tr>
                         <th scope="col" class="col-4 ps-4">Piatto</th>
-                        <th scope="col" class="col-3">Quantità</th>
+                        <th scope="col" class="col-4 text-center">Quantità</th>
                         <th scope="col" class="col-3">Prezzo</th>
-                        <th scope="col" class="col-2 text-center">Elimina</th>
+                        <th scope="col" class="col-1 text-center"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(item, index) in store.cart" :key="index">
                         <td class="ps-4">{{ item.name }}</td>
                         <td>
-                            <button class="btn border-0 btn_quantity" @click="minusQuantity(item)"
-                                v-bind:disabled="item.quantity === 1">
-                                <i class=" fa-solid fa-minus"></i>
-                            </button>
-                            <strong class="mx-3">{{ item.quantity }}</strong>
-                            <button class="btn border-0 btn_quantity" @click="plusQuantity(item)">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
+                            <div class="d-flex justify-content-evenly">
+                                <button class="btn border-0 btn_quantity" @click="minusQuantity(item)"
+                                    v-bind:disabled="item.quantity === 1">
+                                    <i class=" fa-solid fa-minus"></i>
+                                </button>
+                                <strong class="mx-1">{{ item.quantity }}</strong>
+                                <button class="btn border-0 btn_quantity" @click="plusQuantity(item)">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
                         </td>
                         <td>{{ item.price }} &euro;</td>
 
@@ -261,6 +263,7 @@ table#ms_table {
     .btn_quantity {
         color: $color10;
         background-color: $color9;
+        font-size: 10px;
     }
 }
 
