@@ -202,11 +202,11 @@ export default {
             </h2>
             <!-- /Carrello -->
 
-            <div class="text-end">
+            <div v-show="!showForm" class="text-end">
                 <!-- Pulsante per svuotare completamente il carrello -->
-                <button class="btn btn-danger mx-2 fs-4" @click="clearCart">Svuota Carrello</button>
+                <!-- <button class="btn btn-danger mx-2 fs-4" @click="clearCart">Svuota Carrello</button> -->
                 <!-- Bottone Checkout -->
-                <button class="btn custom_btn fs-4" @click="showUserDataForm" v-show="!showForm">Checkout</button>
+                <button class="btn custom_btn fs-4" @click="showUserDataForm">Checkout</button>
             </div>
 
             <div id="checkout_form" class="rounded my-4 p-4" v-show="showForm">
